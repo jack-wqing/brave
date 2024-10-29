@@ -40,10 +40,12 @@ import brave.propagation.CurrentTraceContextCustomizer;
 public interface TracingCustomizer {
   /** Use to avoid comparing against null references */
   TracingCustomizer NOOP = new TracingCustomizer() {
-    @Override public void customize(Tracing.Builder builder) {
+    @Override
+    public void customize(Tracing.Builder builder) {
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
       return "NoopTracingCustomizer{}";
     }
   };

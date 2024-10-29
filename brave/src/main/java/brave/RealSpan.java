@@ -15,30 +15,30 @@ final class RealSpan extends Span {
   final MutableSpan state;
   final Clock clock;
 
-  RealSpan(TraceContext context,
-    PendingSpans pendingSpans,
-    MutableSpan state,
-    Clock clock
-  ) {
+  RealSpan(TraceContext context, PendingSpans pendingSpans, MutableSpan state, Clock clock) {
     this.context = context;
     this.pendingSpans = pendingSpans;
     this.state = state;
     this.clock = clock;
   }
 
-  @Override public boolean isNoop() {
+  @Override
+  public boolean isNoop() {
     return false;
   }
 
-  @Override public TraceContext context() {
+  @Override
+  public TraceContext context() {
     return context;
   }
 
-  @Override public SpanCustomizer customizer() {
+  @Override
+  public SpanCustomizer customizer() {
     return new SpanCustomizerShield(this);
   }
 
-  @Override public Span start() {
+  @Override
+  public Span start() {
     return start(clock.currentTimeMicroseconds());
   }
 
@@ -63,11 +63,13 @@ final class RealSpan extends Span {
     return this;
   }
 
-  @Override public Span annotate(String value) {
+  @Override
+  public Span annotate(String value) {
     return annotate(clock.currentTimeMicroseconds(), value);
   }
 
-  @Override public Span annotate(long timestamp, String value) {
+  @Override
+  public Span annotate(long timestamp, String value) {
     // Modern instrumentation should not send annotations such as this, but we leniently
     // accept them rather than fail. This for example allows old bridges like to Brave v3 to work
     if ("cs".equals(value)) {
@@ -98,52 +100,61 @@ final class RealSpan extends Span {
     return this;
   }
 
-  @Override public Span tag(String key, String value) {
+  @Override
+  public Span tag(String key, String value) {
     synchronized (state) {
       state.tag(key, value);
     }
     return this;
   }
 
-  @Override public Span error(Throwable throwable) {
+  @Override
+  public Span error(Throwable throwable) {
     synchronized (state) {
       state.error(throwable);
     }
     return this;
   }
 
-  @Override public Span remoteServiceName(String remoteServiceName) {
+  @Override
+  public Span remoteServiceName(String remoteServiceName) {
     synchronized (state) {
       state.remoteServiceName(remoteServiceName);
     }
     return this;
   }
 
-  @Override public boolean remoteIpAndPort(String remoteIp, int remotePort) {
+  @Override
+  public boolean remoteIpAndPort(String remoteIp, int remotePort) {
     synchronized (state) {
       return state.remoteIpAndPort(remoteIp, remotePort);
     }
   }
 
-  @Override public void finish() {
+  @Override
+  public void finish() {
     finish(0L);
   }
 
-  @Override public void finish(long timestamp) {
+  @Override
+  public void finish(long timestamp) {
     synchronized (state) {
       pendingSpans.finish(context, timestamp);
     }
   }
 
-  @Override public void abandon() {
+  @Override
+  public void abandon() {
     pendingSpans.abandon(context);
   }
 
-  @Override public void flush() {
+  @Override
+  public void flush() {
     pendingSpans.flush(context);
   }
 
-  @Override public String toString() {
+  @Override
+  public String toString() {
     return "RealSpan(" + context + ")";
   }
 
@@ -151,7 +162,8 @@ final class RealSpan extends Span {
    * This also matches equals against a lazy span. The rationale is least surprise to the user, as
    * code should not act differently given an instance of lazy or {@link RealSpan}.
    */
-  @Override public boolean equals(Object o) {
+  @Override
+  public boolean equals(Object o) {
     if (o == this) return true;
     return isEqualToRealOrLazySpan(context, o);
   }
@@ -167,7 +179,8 @@ final class RealSpan extends Span {
     return false;
   }
 
-  @Override public int hashCode() {
+  @Override
+  public int hashCode() {
     return context.hashCode();
   }
 }

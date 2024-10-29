@@ -18,11 +18,13 @@ final class TickClock implements Clock {
     this.baseTickNanos = baseTickNanos;
   }
 
-  @Override public long currentTimeMicroseconds() {
+  @Override
+  public long currentTimeMicroseconds() {
     return ((platform.nanoTime() - baseTickNanos) / 1000) + baseEpochMicros;
   }
 
-  @Override public String toString() {
+  @Override
+  public String toString() {
     return "TickClock{"
       + "baseEpochMicros=" + baseEpochMicros + ", "
       + "baseTickNanos=" + baseTickNanos

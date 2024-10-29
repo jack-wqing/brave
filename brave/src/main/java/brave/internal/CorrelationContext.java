@@ -15,7 +15,8 @@ package brave.internal;
 public interface CorrelationContext {
   /** Returns the string property of the specified name or {@code null}. */
   // same as BaggageContext#getValue(BaggageField, TraceContext)
-  @Nullable String getValue(String name);
+  @Nullable
+  String getValue(String name);
 
   /** Returns false if the update was ignored. */
   // same as BaggageContext#updateValue(BaggageField, TraceContext, String)

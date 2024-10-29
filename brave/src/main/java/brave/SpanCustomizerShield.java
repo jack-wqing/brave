@@ -12,22 +12,26 @@ final class SpanCustomizerShield implements SpanCustomizer {
     this.delegate = delegate;
   }
 
-  @Override public SpanCustomizer name(String name) {
+  @Override
+  public SpanCustomizer name(String name) {
     delegate.name(name);
     return this;
   }
 
-  @Override public SpanCustomizer annotate(String value) {
+  @Override
+  public SpanCustomizer annotate(String value) {
     delegate.annotate(value);
     return this;
   }
 
-  @Override public SpanCustomizer tag(String key, String value) {
+  @Override
+  public SpanCustomizer tag(String key, String value) {
     delegate.tag(key, value);
     return this;
   }
 
-  @Override public String toString() {
+  @Override
+  public String toString() {
     return "SpanCustomizer(" + delegate + ")";
   }
 }

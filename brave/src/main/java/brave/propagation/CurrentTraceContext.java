@@ -140,16 +140,19 @@ public abstract class CurrentTraceContext {
      * redundancy.
      */
     Scope NOOP = new Scope() {
-      @Override public void close() {
+      @Override
+      public void close() {
       }
 
-      @Override public String toString() {
+      @Override
+      public String toString() {
         return "NoopScope";
       }
     };
 
     /** No exceptions are thrown when unbinding a span scope. */
-    @Override void close();
+    @Override
+    void close();
   }
 
   /**
@@ -171,7 +174,8 @@ public abstract class CurrentTraceContext {
      * @since 5.11
      */
     ScopeDecorator NOOP = new ScopeDecorator() {
-      @Override public Scope decorateScope(TraceContext context, Scope scope) {
+      @Override
+      public Scope decorateScope(TraceContext context, Scope scope) {
         return scope;
       }
 
@@ -199,7 +203,7 @@ public abstract class CurrentTraceContext {
    *
    * <p>Sometimes people make different instances of the tracer just to change configuration like
    * the local service name. If we used a thread-instance approach, none of these would be able to
-   * see eachother's scopes. This would break {@link Tracing#currentTracer()} scope visibility in a
+   * see each other's scopes. This would break {@link Tracing#currentTracer()} scope visibility in a
    * way few would want to debug. It might be phrased as "MySQL always starts a new trace and I
    * don't know why."
    *
@@ -208,8 +212,7 @@ public abstract class CurrentTraceContext {
    */
   public static final class Default extends ThreadLocalCurrentTraceContext {
     // Inheritable as Brave 3's ThreadLocalServerClientAndLocalSpanState was inheritable
-    static final InheritableThreadLocal<TraceContext> INHERITABLE =
-      new InheritableThreadLocal<TraceContext>();
+    static final InheritableThreadLocal<TraceContext> INHERITABLE = new InheritableThreadLocal<TraceContext>();
 
     /** Uses a non-inheritable static thread local */
     public static CurrentTraceContext create() {

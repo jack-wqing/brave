@@ -14,72 +14,90 @@ final class NoopSpan extends Span {
     this.context = context;
   }
 
-  @Override public SpanCustomizer customizer() {
+  @Override
+  public SpanCustomizer customizer() {
     return NoopSpanCustomizer.INSTANCE;
   }
 
-  @Override public boolean isNoop() {
+  @Override
+  public boolean isNoop() {
     return true;
   }
 
-  @Override public TraceContext context() {
+  @Override
+  public TraceContext context() {
     return context;
   }
 
-  @Override public Span start() {
+  @Override
+  public Span start() {
     return this;
   }
 
-  @Override public Span start(long timestamp) {
+  @Override
+  public Span start(long timestamp) {
     return this;
   }
 
-  @Override public Span name(String name) {
+  @Override
+  public Span name(String name) {
     return this;
   }
 
-  @Override public Span kind(Kind kind) {
+  @Override
+  public Span kind(Kind kind) {
     return this;
   }
 
-  @Override public Span annotate(String value) {
+  @Override
+  public Span annotate(String value) {
     return this;
   }
 
-  @Override public Span annotate(long timestamp, String value) {
+  @Override
+  public Span annotate(long timestamp, String value) {
     return this;
   }
 
-  @Override public Span remoteServiceName(String remoteServiceName) {
+  @Override
+  public Span remoteServiceName(String remoteServiceName) {
     return this;
   }
 
   /** Returns true in order to prevent secondary conditions when in no-op mode */
-  @Override public boolean remoteIpAndPort(String remoteIp, int port) {
+  @Override
+  public boolean remoteIpAndPort(String remoteIp, int port) {
     return true;
   }
 
-  @Override public Span tag(String key, String value) {
+  @Override
+  public Span tag(String key, String value) {
     return this;
   }
 
-  @Override public Span error(Throwable throwable) {
+  @Override
+  public Span error(Throwable throwable) {
     return this;
   }
 
-  @Override public void finish() {
+  @Override
+  public void finish() {
   }
 
-  @Override public void finish(long timestamp) {
+  @Override
+  public void finish(long timestamp) {
   }
 
-  @Override public void abandon() {
+  @Override
+  public void abandon() {
   }
 
-  @Override public void flush() {
+  @Override
+  public void flush() {
   }
 
-  @Override public String toString() {
+  @Override
+  public String toString() {
     return "NoopSpan(" + context + ")";
   }
 
@@ -87,7 +105,8 @@ final class NoopSpan extends Span {
    * This also matches equals against a lazy span. The rationale is least surprise to the user, as
    * code should not act differently given an instance of lazy or {@link NoopSpan}.
    */
-  @Override public boolean equals(Object o) {
+  @Override
+  public boolean equals(Object o) {
     if (o == this) return true;
     return isEqualToNoopOrLazySpan(context, o);
   }
@@ -103,7 +122,8 @@ final class NoopSpan extends Span {
     return false;
   }
 
-  @Override public int hashCode() {
+  @Override
+  public int hashCode() {
     return context.hashCode();
   }
 }

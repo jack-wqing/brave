@@ -10,7 +10,7 @@ import brave.propagation.TraceContext;
 /**
  * Used to model the latency of an operation within a method block.
  *
- * Here's a typical example of synchronous tracing from perspective of the scoped span:
+// * Here's a typical example of synchronous tracing from perspective of the scoped span:
  * <pre>{@code
  * // Note span methods chain. Explicitly start the span when ready.
  * ScopedSpan span = tracer.startScopedSpan("encode");
@@ -31,6 +31,10 @@ import brave.propagation.TraceContext;
  * instead.
  *
  * @since 4.19
+ */
+
+/**
+ * 线程内部使用的span model表示
  */
 public abstract class ScopedSpan implements SpanCustomizer {
   /**
@@ -55,21 +59,24 @@ public abstract class ScopedSpan implements SpanCustomizer {
    *
    * @since 5.11
    */
-  @Override public abstract ScopedSpan name(String name);
+  @Override
+  public abstract ScopedSpan name(String name);
 
   /**
    * {@inheritDoc}
    *
    * @since 4.19
    */
-  @Override public abstract ScopedSpan tag(String key, String value);
+  @Override
+  public abstract ScopedSpan tag(String key, String value);
 
   /**
    * {@inheritDoc}
    *
    * @since 4.19
    */
-  @Override public abstract ScopedSpan annotate(String value);
+  @Override
+  public abstract ScopedSpan annotate(String value);
 
   /**
    * Records an error that impacted this operation.
@@ -77,6 +84,9 @@ public abstract class ScopedSpan implements SpanCustomizer {
    * <p><em>Note:</em> Calling this does not {@linkplain #finish() finish} the span.
    *
    * @since 4.19
+   */
+  /**
+   * error 之后还的finish 才可以
    */
   public abstract ScopedSpan error(Throwable throwable);
 

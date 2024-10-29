@@ -23,7 +23,8 @@ public final class Tags {
    * @since 5.11
    */
   public static final Tag<Throwable> ERROR = new Tag<Throwable>("error") {
-    @Override protected String parseValue(Throwable input, TraceContext context) {
+    @Override
+    protected String parseValue(Throwable input, TraceContext context) {
       if (input == null) throw new NullPointerException("input == null");
       String message = input.getMessage();
       if (message != null) return message;

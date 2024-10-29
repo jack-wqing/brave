@@ -136,7 +136,8 @@ public final class TraceIdContext extends SamplingFlags {
   }
 
   /** Only includes mandatory fields {@link #traceIdHigh()} and {@link #traceId()} */
-  @Override public boolean equals(Object o) {
+  @Override
+  public boolean equals(Object o) {
     if (o == this) return true;
     if (!(o instanceof TraceIdContext)) return false;
     TraceIdContext that = (TraceIdContext) o;
@@ -144,7 +145,8 @@ public final class TraceIdContext extends SamplingFlags {
   }
 
   /** Only includes mandatory fields {@link #traceIdHigh()} and {@link #traceId()} */
-  @Override public int hashCode() {
+  @Override
+  public int hashCode() {
     int h = 1;
     h *= 1000003;
     h ^= (int) ((traceIdHigh >>> 32) ^ traceIdHigh);

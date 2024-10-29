@@ -42,6 +42,10 @@ import static brave.internal.codec.HexCodec.writeHexLong;
  *
  * <p>See <a href="https://github.com/openzipkin/b3-propagation">B3 Propagation</a>
  */
+
+/**
+ * 单key b3/B3
+ */
 public final class B3SingleFormat {
   static final int FORMAT_MAX_LENGTH = 32 + 1 + 16 + 3 + 16; // traceid128-spanid-1-parentid
 

@@ -108,7 +108,7 @@ public abstract class SpanHandler {
      *
      * <h2>Implementation</h2>
      * <p>The {@link MutableSpan} parameter to {@link #end(TraceContext, MutableSpan, Cause)}
-     * includes data configured by default and any state that was was orphaned (ex a tag). You
+     * includes data configured by default and any state that was orphaned (ex a tag). You
      * cannot assume the span has a {@link MutableSpan#startTimestamp()} for example.
      */
     ORPHANED
@@ -120,7 +120,8 @@ public abstract class SpanHandler {
    * @since 5.12
    */
   public static final SpanHandler NOOP = new SpanHandler() {
-    @Override public String toString() {
+    @Override
+    public String toString() {
       return "NoopSpanHandler{}";
     }
   };

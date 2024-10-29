@@ -31,47 +31,56 @@ final class RealScopedSpan extends ScopedSpan {
     this.clock = clock;
   }
 
-  @Override public boolean isNoop() {
+  @Override
+  public boolean isNoop() {
     return false;
   }
 
-  @Override public TraceContext context() {
+  @Override
+  public TraceContext context() {
     return context;
   }
 
-  @Override public ScopedSpan name(String name) {
+  @Override
+  public ScopedSpan name(String name) {
     state.name(name);
     return this;
   }
 
-  @Override public ScopedSpan tag(String key, String value) {
+  @Override
+  public ScopedSpan tag(String key, String value) {
     state.tag(key, value);
     return this;
   }
 
-  @Override public ScopedSpan annotate(String value) {
+  @Override
+  public ScopedSpan annotate(String value) {
     state.annotate(clock.currentTimeMicroseconds(), value);
     return this;
   }
 
-  @Override public ScopedSpan error(Throwable throwable) {
+  @Override
+  public ScopedSpan error(Throwable throwable) {
     state.error(throwable);
     return this;
   }
 
-  @Override public void finish() {
+  @Override
+  public void finish() {
     scope.close();
     pendingSpans.finish(context, 0L);
   }
 
-  @Override public boolean equals(Object o) {
+  @Override
+  public boolean equals(Object o) {
     if (o == this) return true;
     if (!(o instanceof RealScopedSpan)) return false;
     RealScopedSpan that = (RealScopedSpan) o;
     return context.equals(that.context) && scope.equals(that.scope);
   }
 
-  @Override public int hashCode() {
+  @Override
+  public int hashCode() {
     int h = 1;
     h *= 1000003;
     h ^= context.hashCode();

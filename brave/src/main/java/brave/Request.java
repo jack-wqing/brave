@@ -39,7 +39,8 @@ public abstract class Request {
    */
   public abstract Object unwrap();
 
-  @Override public String toString() {
+  @Override
+  public String toString() {
     Object unwrapped = unwrap();
     // handles case where unwrap() returning this or null: don't NPE or stack overflow!
     if (unwrapped == null || unwrapped == this) return getClass().getSimpleName();

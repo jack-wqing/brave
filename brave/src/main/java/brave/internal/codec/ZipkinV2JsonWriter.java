@@ -21,7 +21,8 @@ public final class ZipkinV2JsonWriter implements WriteBuffer.Writer<MutableSpan>
     this.errorTag = errorTag;
   }
 
-  @Override public int sizeInBytes(MutableSpan span) {
+  @Override
+  public int sizeInBytes(MutableSpan span) {
     int sizeInBytes = 1; // {
     if (span.traceId() != null) {
       sizeInBytes += 12; // "traceId":""
@@ -106,7 +107,8 @@ public final class ZipkinV2JsonWriter implements WriteBuffer.Writer<MutableSpan>
     return sizeInBytes + 1; // }
   }
 
-  @Override public void write(MutableSpan span, WriteBuffer b) {
+  @Override
+  public void write(MutableSpan span, WriteBuffer b) {
     b.writeByte('{');
     boolean wroteField = false;
     if (span.traceId() != null) {

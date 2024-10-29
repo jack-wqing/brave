@@ -104,7 +104,8 @@ public class ThreadLocalSpan {
    * Returns the {@link Tracer#nextSpan(TraceContextOrSamplingFlags)} or null if {@link
    * #CURRENT_TRACER} and tracing isn't available.
    */
-  @Nullable public Span next(TraceContextOrSamplingFlags extracted) {
+  @Nullable
+  public Span next(TraceContextOrSamplingFlags extracted) {
     Tracer tracer = tracer();
     if (tracer == null) return null;
     Span next = tracer.nextSpan(extracted);
@@ -117,7 +118,8 @@ public class ThreadLocalSpan {
    * Returns the {@link Tracer#nextSpan()} or null if {@link #CURRENT_TRACER} and tracing isn't
    * available.
    */
-  @Nullable public Span next() {
+  @Nullable
+  public Span next() {
     Tracer tracer = tracer();
     if (tracer == null) return null;
     Span next = tracer.nextSpan();
@@ -144,7 +146,8 @@ public class ThreadLocalSpan {
    * Tracer#withSpanInScope(Span)} or {@link CurrentTraceContext#newScope(TraceContext)} outside a
    * try/finally block.
    */
-  @Nullable public Span remove() {
+  @Nullable
+  public Span remove() {
     Tracer tracer = tracer();
     Span currentSpan = tracer != null ? tracer.currentSpan() : null;
     SpanAndScope spanAndScope = getCurrentSpanInScopeStack().pollFirst();

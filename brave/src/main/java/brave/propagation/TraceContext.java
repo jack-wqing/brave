@@ -140,7 +140,8 @@ public final class TraceContext extends SamplingFlags {
    *
    * @see #parentIdAsLong()
    */
-  @Nullable public final Long parentId() {
+  @Nullable
+  public final Long parentId() {
     return parentId != 0 ? parentId : null;
   }
 

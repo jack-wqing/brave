@@ -48,7 +48,8 @@ public abstract class Tag<I> {
    * string is a valid tag value!
    * @since 5.11
    */
-  @Nullable protected abstract String parseValue(I input, @Nullable TraceContext context);
+  @Nullable
+  protected abstract String parseValue(I input, @Nullable TraceContext context);
 
   /**
    * Returns the value that would be tagged to the span or {@code null}.
@@ -57,7 +58,8 @@ public abstract class Tag<I> {
    * @see #parseValue(Object, TraceContext)
    * @since 5.12
    */
-  @Nullable public String value(@Nullable I input, @Nullable TraceContext context) {
+  @Nullable
+  public String value(@Nullable I input, @Nullable TraceContext context) {
     if (input == null) return null;
     return parseValue(input, context);
   }
@@ -135,7 +137,8 @@ public abstract class Tag<I> {
     this.key = validateNonEmpty("key", key);
   }
 
-  @Override public String toString() {
+  @Override
+  public String toString() {
     return getClass().getSimpleName() + "{" + key + "}";
   }
 

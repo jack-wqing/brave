@@ -102,7 +102,8 @@ public final class MutableSpan implements Cloneable {
      *
      * @see brave.SpanCustomizer#tag(String, String)
      */
-    @Nullable String update(String key, String value);
+    @Nullable
+    String update(String key, String value);
   }
 
   /** @since 5.4 */
@@ -112,7 +113,8 @@ public final class MutableSpan implements Cloneable {
      *
      * @see brave.Span#annotate(long, String)
      */
-    @Nullable String update(long timestamp, String value);
+    @Nullable
+    String update(long timestamp, String value);
   }
 
   /*
@@ -211,7 +213,8 @@ public final class MutableSpan implements Cloneable {
    *
    * @since 5.12
    */
-  @Nullable public String localRootId() {
+  @Nullable
+  public String localRootId() {
     return localRootId;
   }
 
@@ -229,7 +232,8 @@ public final class MutableSpan implements Cloneable {
    *
    * @since 5.12
    */
-  @Nullable public String parentId() {
+  @Nullable
+  public String parentId() {
     return parentId;
   }
 
@@ -265,7 +269,8 @@ public final class MutableSpan implements Cloneable {
    *
    * @since 5.4
    */
-  @Nullable public String name() {
+  @Nullable
+  public String name() {
     return name;
   }
 
@@ -344,7 +349,8 @@ public final class MutableSpan implements Cloneable {
    *
    * @since 5.4
    */
-  @Nullable public String localServiceName() {
+  @Nullable
+  public String localServiceName() {
     return localServiceName;
   }
 
@@ -371,7 +377,8 @@ public final class MutableSpan implements Cloneable {
    *
    * @since 5.4
    */
-  @Nullable public String localIp() {
+  @Nullable
+  public String localIp() {
     return localIp;
   }
 
@@ -418,7 +425,8 @@ public final class MutableSpan implements Cloneable {
    * @see #remotePort()
    * @since 5.4
    */
-  @Nullable public String remoteServiceName() {
+  @Nullable
+  public String remoteServiceName() {
     return remoteServiceName;
   }
 
@@ -443,7 +451,8 @@ public final class MutableSpan implements Cloneable {
    * @see #remotePort()
    * @since 5.4
    */
-  @Nullable public String remoteIp() {
+  @Nullable
+  public String remoteIp() {
     return remoteIp;
   }
 
@@ -764,7 +773,8 @@ public final class MutableSpan implements Cloneable {
    *
    * @since 5.4
    */
-  @Nullable public String tag(String key) {
+  @Nullable
+  public String tag(String key) {
     if (key == null) throw new NullPointerException("key == null");
     if (key.isEmpty()) throw new IllegalArgumentException("key is empty");
     for (int i = 0, length = tagCount * 2; i < length; i += 2) {
@@ -786,7 +796,8 @@ public final class MutableSpan implements Cloneable {
    *
    * @since 5.12
    */
-  @Nullable public String removeTag(String key) {
+  @Nullable
+  public String removeTag(String key) {
     if (key == null) throw new NullPointerException("key == null");
     if (key.isEmpty()) throw new IllegalArgumentException("key is empty");
     for (int i = 0, length = tagCount * 2; i < length; i += 2) {
@@ -876,11 +887,13 @@ public final class MutableSpan implements Cloneable {
 
   static final ZipkinJsonV2 JSON_ENCODER = new ZipkinJsonV2(Tags.ERROR);
 
-  @Override public String toString() {
+  @Override
+  public String toString() {
     return new String(JSON_ENCODER.encode(this), UTF_8);
   }
 
-  @Override public int hashCode() {
+  @Override
+  public int hashCode() {
     int h = 1000003; // mutable! cannot cache hashCode
     h ^= traceId == null ? 0 : traceId.hashCode();
     h *= 1000003;
@@ -998,7 +1011,8 @@ public final class MutableSpan implements Cloneable {
     return h;
   }
 
-  @Nullable static String normalizeIdField(String field, @Nullable String id, boolean isNullable) {
+  @Nullable
+  static String normalizeIdField(String field, @Nullable String id, boolean isNullable) {
     if (id == null) {
       if (isNullable) return null;
       throw new NullPointerException(field + " == null");

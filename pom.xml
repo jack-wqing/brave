@@ -159,6 +159,7 @@
     <module>context</module>
     <module>instrumentation</module>
     <module>spring-beans</module>
+    <module>brave-practice</module>
   </modules>
 
   <distributionManagement>

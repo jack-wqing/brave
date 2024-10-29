@@ -28,7 +28,8 @@ public abstract class Response {
    * <p>Implementations should return the last wire-level request that caused this response or
    * error.
    */
-  @Nullable public Request request() {
+  @Nullable
+  public Request request() {
     return null;
   }
 
@@ -48,7 +49,8 @@ public abstract class Response {
    * nothing. If they have a better error tag value than what would be derived from the {@link
    * Throwable}, they can overwrite it.
    */
-  @Nullable public abstract Throwable error();
+  @Nullable
+  public abstract Throwable error();
 
   /**
    * Returns the underlying response object or {@code null} if there is none. Here are some response
@@ -62,9 +64,11 @@ public abstract class Response {
    *
    * @since 5.10
    */
-  @Nullable public abstract Object unwrap();
+  @Nullable
+  public abstract Object unwrap();
 
-  @Override public String toString() {
+  @Override
+  public String toString() {
     Object unwrapped = unwrap();
     // handles case where unwrap() returning this or null: don't NPE or stack overflow!
     if (unwrapped == null || unwrapped == this) return getClass().getSimpleName();

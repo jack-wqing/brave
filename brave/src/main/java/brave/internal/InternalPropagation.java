@@ -16,6 +16,10 @@ import java.util.List;
  *
  * <p>Inspired by {@code okhttp3.internal.Internal}.
  */
+
+/**
+ * propagation标识
+ */
 public abstract class InternalPropagation {
   /**
    * A flags bitfield is used internally inside {@link TraceContext} as opposed to several booleans.

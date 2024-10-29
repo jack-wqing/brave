@@ -49,12 +49,12 @@ public final class PendingSpans extends WeakConcurrentMap<TraceContext, PendingS
    * decorated context first. This ensures an externalized, but existing context is not mistaken for
    * a new local root.
    */
-  @Nullable public PendingSpan get(TraceContext context) {
+  @Nullable
+  public PendingSpan get(TraceContext context) {
     return getIfPresent(context);
   }
 
-  public PendingSpan getOrCreate(
-    @Nullable TraceContext parent, TraceContext context, boolean start) {
+  public PendingSpan getOrCreate(@Nullable TraceContext parent, TraceContext context, boolean start) {
     PendingSpan result = get(context);
     if (result != null) return result;
 
@@ -117,7 +117,8 @@ public final class PendingSpans extends WeakConcurrentMap<TraceContext, PendingS
   }
 
   /** Reports spans orphaned by garbage collection. */
-  @Override protected void expungeStaleEntries() {
+  @Override
+  protected void expungeStaleEntries() {
     Reference<?> reference;
     boolean noop = this.noop.get();
     while ((reference = poll()) != null) {

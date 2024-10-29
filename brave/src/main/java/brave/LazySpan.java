@@ -23,77 +23,95 @@ final class LazySpan extends Span {
     this.context = context;
   }
 
-  @Override public boolean isNoop() {
+  @Override
+  public boolean isNoop() {
     return span().isNoop();
   }
 
-  @Override public TraceContext context() {
+  @Override
+  public TraceContext context() {
     return span().context();
   }
 
-  @Override public SpanCustomizer customizer() {
+  @Override
+  public SpanCustomizer customizer() {
     return new SpanCustomizerShield(this);
   }
 
-  @Override public Span start() {
+  @Override
+  public Span start() {
     return span().start();
   }
 
-  @Override public Span start(long timestamp) {
+  @Override
+  public Span start(long timestamp) {
     return span().start(timestamp);
   }
 
-  @Override public Span name(String name) {
+  @Override
+  public Span name(String name) {
     return span().name(name);
   }
 
-  @Override public Span kind(Kind kind) {
+  @Override
+  public Span kind(Kind kind) {
     return span().kind(kind);
   }
 
-  @Override public Span annotate(String value) {
+  @Override
+  public Span annotate(String value) {
     return span().annotate(value);
   }
 
-  @Override public Span annotate(long timestamp, String value) {
+  @Override
+  public Span annotate(long timestamp, String value) {
     return span().annotate(timestamp, value);
   }
 
-  @Override public Span tag(String key, String value) {
+  @Override
+  public Span tag(String key, String value) {
     return span().tag(key, value);
   }
 
-  @Override public Span error(Throwable throwable) {
+  @Override
+  public Span error(Throwable throwable) {
     return span().error(throwable);
   }
 
-  @Override public Span remoteServiceName(String remoteServiceName) {
+  @Override
+  public Span remoteServiceName(String remoteServiceName) {
     return span().remoteServiceName(remoteServiceName);
   }
 
-  @Override public boolean remoteIpAndPort(String remoteIp, int remotePort) {
+  @Override
+  public boolean remoteIpAndPort(String remoteIp, int remotePort) {
     return span().remoteIpAndPort(remoteIp, remotePort);
   }
 
-  @Override public void finish() {
+  @Override
+  public void finish() {
     span().finish();
   }
 
-  @Override public void finish(long timestamp) {
+  @Override
+  public void finish(long timestamp) {
     span().finish(timestamp);
   }
 
-  @Override public void abandon() {
+  @Override
+  public void abandon() {
     if (delegate == null) return; // prevent resurrection
     span().abandon();
   }
 
-  @Override public void flush() {
+  @Override
+  public void flush() {
     if (delegate == null) return; // prevent resurrection
     span().flush();
   }
 
-  @Override public String toString() {
+  @Override
+  public String toString() {
     return "LazySpan(" + context + ")";
   }
 
@@ -102,7 +120,8 @@ final class LazySpan extends Span {
    * as code should not act differently given an instance of lazy {@link NoopSpan} or {@link
    * RealSpan}.
    */
-  @Override public boolean equals(Object o) {
+  @Override
+  public boolean equals(Object o) {
     if (o == this) return true;
     if (o instanceof LazySpan) {
       return context.equals(((LazySpan) o).context);
@@ -114,7 +133,8 @@ final class LazySpan extends Span {
     return false;
   }
 
-  @Override public int hashCode() {
+  @Override
+  public int hashCode() {
     return context.hashCode();
   }
 

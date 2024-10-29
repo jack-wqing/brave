@@ -12,19 +12,23 @@ package brave;
 public enum NoopSpanCustomizer implements SpanCustomizer {
   INSTANCE;
 
-  @Override public SpanCustomizer name(String name) {
+  @Override
+  public SpanCustomizer name(String name) {
     return this;
   }
 
-  @Override public SpanCustomizer tag(String key, String value) {
+  @Override
+  public SpanCustomizer tag(String key, String value) {
     return this;
   }
 
-  @Override public SpanCustomizer annotate(String value) {
+  @Override
+  public SpanCustomizer annotate(String value) {
     return this;
   }
 
-  @Override public String toString() {
+  @Override
+  public String toString() {
     return "NoopSpanCustomizer{}";
   }
 }

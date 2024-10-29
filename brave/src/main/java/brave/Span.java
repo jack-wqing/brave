@@ -31,6 +31,10 @@ import brave.propagation.TraceContext;
  * All methods return {@linkplain Span} for chaining, but the instance is always the same. Also,
  * when only tracing in-process operations, consider {@link ScopedSpan}: a simpler api.
  */
+
+/**
+ * 跨进程，跨线程的操作
+ */
 // Design note: this does not require a builder as the span is mutable anyway. Having a single
 // mutation interface is less code to maintain. Those looking to prepare a span before starting it
 // can simply call start when they are ready.
@@ -90,7 +94,8 @@ public abstract class Span implements SpanCustomizer {
   public abstract Span start(long timestamp);
 
   /** {@inheritDoc} */
-  @Override public abstract Span name(String name);
+  @Override
+  public abstract Span name(String name);
 
   /**
    * When present, the span is remote. This value clarifies how to interpret {@link
@@ -103,7 +108,8 @@ public abstract class Span implements SpanCustomizer {
   public abstract Span kind(@Nullable Kind kind);
 
   /** {@inheritDoc} */
-  @Override public abstract Span annotate(String value);
+  @Override
+  public abstract Span annotate(String value);
 
   /**
    * Like {@link #annotate(String)}, except with a given timestamp in microseconds.
@@ -114,7 +120,8 @@ public abstract class Span implements SpanCustomizer {
   public abstract Span annotate(long timestamp, String value);
 
   /** {@inheritDoc} */
-  @Override public abstract Span tag(String key, String value);
+  @Override
+  public abstract Span tag(String key, String value);
 
   /**
    * Records an error that impacted this operation.

@@ -28,11 +28,13 @@ public abstract class B3Propagation<K> implements Propagation<K> {
   public enum Format implements InjectorFunction {
     /** The trace context is encoded with a several fields prefixed with "x-b3-". */
     MULTI() {
-      @Override public List<String> keyNames() {
+      @Override
+      public List<String> keyNames() {
         return MULTI_KEY_NAMES;
       }
 
-      @Override public <R> void inject(Setter<R, String> setter, TraceContext context, R request) {
+      @Override
+      public <R> void inject(Setter<R, String> setter, TraceContext context, R request) {
         setter.put(request, TRACE_ID, context.traceIdString());
         setter.put(request, SPAN_ID, context.spanIdString());
         String parentId = context.parentIdString();
@@ -46,21 +48,25 @@ public abstract class B3Propagation<K> implements Propagation<K> {
     },
     /** The trace context is encoded with {@link B3SingleFormat#writeB3SingleFormat(TraceContext)}. */
     SINGLE() {
-      @Override public List<String> keyNames() {
+      @Override
+      public List<String> keyNames() {
         return SINGLE_KEY_NAMES;
       }
 
-      @Override public <R> void inject(Setter<R, String> setter, TraceContext context, R request) {
+      @Override
+      public <R> void inject(Setter<R, String> setter, TraceContext context, R request) {
         setter.put(request, B3, writeB3SingleFormat(context));
       }
     },
     /** The trace context is encoded with {@link B3SingleFormat#writeB3SingleFormatWithoutParentId(TraceContext)}. */
     SINGLE_NO_PARENT() {
-      @Override public List<String> keyNames() {
+      @Override
+      public List<String> keyNames() {
         return SINGLE_KEY_NAMES;
       }
 
-      @Override public <R> void inject(Setter<R, String> setter, TraceContext context, R request) {
+      @Override
+      public <R> void inject(Setter<R, String> setter, TraceContext context, R request) {
         setter.put(request, B3, writeB3SingleFormatWithoutParentId(context));
       }
     };

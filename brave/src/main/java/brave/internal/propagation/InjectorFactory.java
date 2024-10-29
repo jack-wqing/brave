@@ -42,11 +42,13 @@ public final class InjectorFactory {
   /** Like {@link TraceContext.Injector}, except the {@link Setter} is a parameter. */
   public interface InjectorFunction {
     InjectorFunction NOOP = new InjectorFunction() {
-      @Override public List<String> keyNames() {
+      @Override
+      public List<String> keyNames() {
         return Collections.emptyList();
       }
 
-      @Override public <R> void inject(Setter<R, String> setter, TraceContext context, R request) {
+      @Override
+      public <R> void inject(Setter<R, String> setter, TraceContext context, R request) {
       }
     };
 

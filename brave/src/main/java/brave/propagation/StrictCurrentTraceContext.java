@@ -5,6 +5,7 @@
 package brave.propagation;
 
 import brave.internal.Nullable;
+
 import java.io.Closeable;
 
 /**
@@ -33,7 +34,8 @@ public final class StrictCurrentTraceContext extends CurrentTraceContext impleme
     CurrentTraceContext delegate = new ThreadLocalCurrentTraceContext.Builder(local).build();
     StrictScopeDecorator strictScopeDecorator = new StrictScopeDecorator();
 
-    @Override public StrictCurrentTraceContext build() {
+    @Override
+    public StrictCurrentTraceContext build() {
       delegate = new ThreadLocalCurrentTraceContext.Builder(local)
         .addScopeDecorator(strictScopeDecorator)
         .build();
@@ -65,15 +67,18 @@ public final class StrictCurrentTraceContext extends CurrentTraceContext impleme
     strictScopeDecorator = builder.strictScopeDecorator;
   }
 
-  @Override public TraceContext get() {
+  @Override
+  public TraceContext get() {
     return delegate.get();
   }
 
-  @Override public Scope newScope(@Nullable TraceContext context) {
+  @Override
+  public Scope newScope(@Nullable TraceContext context) {
     return decorateScope(context, delegate.newScope(context));
   }
 
-  @Override public Scope maybeScope(TraceContext context) {
+  @Override
+  public Scope maybeScope(TraceContext context) {
     return decorateScope(context, delegate.maybeScope(context));
   }
 
@@ -82,7 +87,8 @@ public final class StrictCurrentTraceContext extends CurrentTraceContext impleme
    *
    * @since 5.11
    */
-  @Override public void close() {
+  @Override
+  public void close() {
     strictScopeDecorator.close();
   }
 }

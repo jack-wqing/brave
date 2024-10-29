@@ -21,7 +21,7 @@ import brave.internal.Nullable;
  *
  * <p>Sometimes people make different instances of the tracer just to change configuration like
  * the local service name. If we used a thread-instance approach, none of these would be able to see
- * eachother's scopes. This would break {@link Tracing#currentTracer()} scope visibility in a way
+ * each other's scopes. This would break {@link Tracing#currentTracer()} scope visibility in a way
  * few would want to debug. It might be phrased as "MySQL always starts a new trace and I don't know
  * why."
  *
@@ -56,11 +56,13 @@ public class ThreadLocalCurrentTraceContext extends CurrentTraceContext { // not
       this.local = local;
     }
 
-    @Override public Builder addScopeDecorator(ScopeDecorator scopeDecorator) {
+    @Override
+    public Builder addScopeDecorator(ScopeDecorator scopeDecorator) {
       return (Builder) super.addScopeDecorator(scopeDecorator);
     }
 
-    @Override public ThreadLocalCurrentTraceContext build() {
+    @Override
+    public ThreadLocalCurrentTraceContext build() {
       return new ThreadLocalCurrentTraceContext(this);
     }
   }
@@ -96,7 +98,8 @@ public class ThreadLocalCurrentTraceContext extends CurrentTraceContext { // not
       this.local = local;
     }
 
-    @Override public void close() {
+    @Override
+    public void close() {
       local.set(null);
     }
   }
@@ -110,7 +113,8 @@ public class ThreadLocalCurrentTraceContext extends CurrentTraceContext { // not
       this.previous = previous;
     }
 
-    @Override public void close() {
+    @Override
+    public void close() {
       local.set(previous);
     }
   }

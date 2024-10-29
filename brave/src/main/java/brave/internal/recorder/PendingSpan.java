@@ -32,7 +32,8 @@ public final class PendingSpan extends WeakReference<TraceContext> {
   }
 
   /** Returns the context for this span unless it was cleared due to GC. */
-  @Nullable public TraceContext context() {
+  @Nullable
+  public TraceContext context() {
     return get();
   }
 

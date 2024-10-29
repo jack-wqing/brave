@@ -29,13 +29,16 @@ public abstract class Platform implements Clock {
   volatile String linkLocalIp;
 
   /** Returns the same value as {@link System#nanoTime()}. */
-  @Nullable public abstract long nanoTime();
+  @Nullable
+  public abstract long nanoTime();
 
 
   /** Guards {@link InetSocketAddress#getHostString()}, as it isn't available until Java 7 */
-  @Nullable public abstract String getHostString(InetSocketAddress socket);
+  @Nullable
+  public abstract String getHostString(InetSocketAddress socket);
 
-  @Nullable public String linkLocalIp() {
+  @Nullable
+  public String linkLocalIp() {
     // uses synchronized variant of double-checked locking as getting the endpoint can be expensive
     if (linkLocalIp != null) return linkLocalIp;
     synchronized (this) {
@@ -145,58 +148,70 @@ public abstract class Platform implements Clock {
 
   public Clock clock() {
     return new Clock() {
-      @Override public long currentTimeMicroseconds() {
+      @Override
+      public long currentTimeMicroseconds() {
         return System.currentTimeMillis() * 1000;
       }
 
-      @Override public String toString() {
+      @Override
+      public String toString() {
         return "System.currentTimeMillis()";
       }
     };
   }
 
   static class Jre9 extends Jre7 {
-    @Override public long currentTimeMicroseconds() {
+    @Override
+    public long currentTimeMicroseconds() {
       java.time.Instant instant = java.time.Clock.systemUTC().instant();
       return (instant.getEpochSecond() * 1000000) + (instant.getNano() / 1000);
     }
 
-    @Override public Clock clock() {
+    @Override
+    public Clock clock() {
       return new Clock() {
         // we could use jdk.internal.misc.VM to do this more efficiently, but it is internal
-        @Override public long currentTimeMicroseconds() {
+        @Override
+        public long currentTimeMicroseconds() {
           return Jre9.this.currentTimeMicroseconds();
         }
 
-        @Override public String toString() {
+        @Override
+        public String toString() {
           return "Clock.systemUTC().instant()";
         }
       };
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
       return "Jre9{}";
     }
   }
 
   static class Jre7 extends Platform {
-    @Override public long currentTimeMicroseconds() {
+    @Override
+    public long currentTimeMicroseconds() {
       return System.currentTimeMillis() * 1000;
     }
 
-    @Override public long nanoTime() {
+    @Override
+    public long nanoTime() {
       return System.nanoTime();
     }
 
-    @Override public String getHostString(InetSocketAddress socket) {
+    @Override
+    public String getHostString(InetSocketAddress socket) {
       return socket.getHostString();
     }
 
-    @Override public long randomLong() {
+    @Override
+    public long randomLong() {
       return java.util.concurrent.ThreadLocalRandom.current().nextLong();
     }
 
-    @Override public long nextTraceIdHigh() {
+    @Override
+    public long nextTraceIdHigh() {
       return nextTraceIdHigh(currentTimeMicroseconds(), java.util.concurrent.ThreadLocalRandom.current().nextInt());
     }
 
@@ -217,23 +232,28 @@ public abstract class Platform implements Clock {
   }
 
   static class Jre6 extends Platform {
-    @Override public long currentTimeMicroseconds() {
+    @Override
+    public long currentTimeMicroseconds() {
       return System.currentTimeMillis() * 1000;
     }
 
-    @Override public long nanoTime() {
+    @Override
+    public long nanoTime() {
       return System.nanoTime();
     }
 
-    @Override public String getHostString(InetSocketAddress socket) {
+    @Override
+    public String getHostString(InetSocketAddress socket) {
       return socket.getAddress().getHostAddress();
     }
 
-    @Override public long randomLong() {
+    @Override
+    public long randomLong() {
       return prng.nextLong();
     }
 
-    @Override public long nextTraceIdHigh() {
+    @Override
+    public long nextTraceIdHigh() {
       return nextTraceIdHigh(currentTimeMicroseconds(), prng.nextInt());
     }
 
@@ -243,7 +263,8 @@ public abstract class Platform implements Clock {
       this.prng = new Random(nanoTime());
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
       return "Jre6{}";
     }
   }

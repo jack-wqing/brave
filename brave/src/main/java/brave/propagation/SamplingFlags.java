@@ -22,7 +22,8 @@ public class SamplingFlags {
 
   static {
     InternalPropagation.instance = new InternalPropagation() {
-      @Override public int flags(SamplingFlags flags) {
+      @Override
+      public int flags(SamplingFlags flags) {
         return flags.flags;
       }
 
@@ -71,7 +72,8 @@ public class SamplingFlags {
    * practice is to generate and propagate identifiers always. This allows other systems, such as
    * logging, to correlate even when the tracing system has no data.
    */
-  @Nullable public final Boolean sampled() {
+  @Nullable
+  public final Boolean sampled() {
     return (flags & FLAG_SAMPLED_SET) == FLAG_SAMPLED_SET
       ? (flags & FLAG_SAMPLED) == FLAG_SAMPLED
       : null;

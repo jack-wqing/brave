@@ -25,6 +25,11 @@ import java.util.List;
  * @param <K> Retained for compatibility with pre Brave 6.0, but always String.
  * @since 4.0
  */
+
+/**
+ * B3是Twitter分布式链路追踪的数据格式: TraceId, SpanId, SampledFlag
+ * @param <K>
+ */
 // The generic type parameter K is always <String>. Even if the deprecated methods are removed in
 // Brave 6.0. This is to avoid a compilation break and revlock.
 public interface Propagation<K> {
@@ -74,7 +79,8 @@ public interface Propagation<K> {
      * {@link #get()}. This will be removed in Brave 7, to allow users to transition without revlock
      * upgrading to Brave 6.
      */
-    @Deprecated public <K> Propagation<K> create(KeyFactory<K> unused) {
+    @Deprecated
+    public <K> Propagation<K> create(KeyFactory<K> unused) {
       // In Brave 5.12, this was abstract, but not used: `get()` dispatched
       // to this. Brave 5.18 implemented this with the below exception to force
       // `get()` to be overridden. Doing so allows us to make `get()` abstract
@@ -122,11 +128,13 @@ public interface Propagation<K> {
   @Deprecated
   interface KeyFactory<K> {
     KeyFactory<String> STRING = new KeyFactory<String>() {
-      @Override public String create(String name) {
+      @Override
+      public String create(String name) {
         return name;
       }
 
-      @Override public String toString() {
+      @Override
+      public String toString() {
         return "StringKeyFactory{}";
       }
     };
@@ -244,7 +252,8 @@ public interface Propagation<K> {
      * @see RemoteGetter
      * @since 5.12
      */
-    @Override void put(R request, String fieldName, String value);
+    @Override
+    void put(R request, String fieldName, String value);
   }
 
   /**

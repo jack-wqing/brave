@@ -16,46 +16,56 @@ final class NoopScopedSpan extends ScopedSpan {
     this.scope = scope;
   }
 
-  @Override public boolean isNoop() {
+  @Override
+  public boolean isNoop() {
     return true;
   }
 
-  @Override public TraceContext context() {
+  @Override
+  public TraceContext context() {
     return context;
   }
 
-  @Override public ScopedSpan name(String name) {
+  @Override
+  public ScopedSpan name(String name) {
     return this;
   }
 
-  @Override public ScopedSpan tag(String key, String value) {
+  @Override
+  public ScopedSpan tag(String key, String value) {
     return this;
   }
 
-  @Override public ScopedSpan annotate(String value) {
+  @Override
+  public ScopedSpan annotate(String value) {
     return this;
   }
 
-  @Override public ScopedSpan error(Throwable throwable) {
+  @Override
+  public ScopedSpan error(Throwable throwable) {
     return this;
   }
 
-  @Override public void finish() {
+  @Override
+  public void finish() {
     scope.close();
   }
 
-  @Override public String toString() {
+  @Override
+  public String toString() {
     return "NoopScopedSpan(" + context + ")";
   }
 
-  @Override public boolean equals(Object o) {
+  @Override
+  public boolean equals(Object o) {
     if (o == this) return true;
     if (!(o instanceof NoopScopedSpan)) return false;
     NoopScopedSpan that = (NoopScopedSpan) o;
     return context.equals(that.context) && scope.equals(that.scope);
   }
 
-  @Override public int hashCode() {
+  @Override
+  public int hashCode() {
     int h = 1;
     h *= 1000003;
     h ^= context.hashCode();

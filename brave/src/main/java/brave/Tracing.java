@@ -84,7 +84,8 @@ public abstract class Tracing implements Closeable {
    *
    * <p>This object should not be cached.
    */
-  @Nullable public static Tracing current() {
+  @Nullable
+  public static Tracing current() {
     return CURRENT.get();
   }
 
@@ -93,7 +94,8 @@ public abstract class Tracing implements Closeable {
    *
    * <p>This object should not be cached.
    */
-  @Nullable public static Tracer currentTracer() {
+  @Nullable
+  public static Tracer currentTracer() {
     Tracing tracing = current();
     return tracing != null ? tracing.tracer() : null;
   }
@@ -115,7 +117,8 @@ public abstract class Tracing implements Closeable {
   public abstract void setNoop(boolean noop);
 
   /** Ensures this component can be garbage collected, by making it not {@link #current()} */
-  @Override abstract public void close();
+  @Override
+  abstract public void close();
 
   public static final class Builder {
     final MutableSpan defaultSpan = new MutableSpan();

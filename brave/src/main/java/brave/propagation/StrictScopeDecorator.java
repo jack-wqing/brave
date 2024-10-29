@@ -42,7 +42,8 @@ public final class StrictScopeDecorator implements ScopeDecorator, Closeable {
    * Identifies problems by throwing {@link IllegalStateException} when a scope is closed on a
    * different thread.
    */
-  @Override public Scope decorateScope(@Nullable TraceContext context, Scope scope) {
+  @Override
+  public Scope decorateScope(@Nullable TraceContext context, Scope scope) {
     if (scope == Scope.NOOP) return scope; // don't track no-op scopes as they cannot leak
 
     CallerStackTrace caller = new CallerStackTrace(context);
@@ -115,7 +116,8 @@ public final class StrictScopeDecorator implements ScopeDecorator, Closeable {
       this.caller = caller;
     }
 
-    @Override public void close() {
+    @Override
+    public void close() {
       caller.closed = true;
 
       pendingScopes.remove(this);
@@ -128,7 +130,8 @@ public final class StrictScopeDecorator implements ScopeDecorator, Closeable {
       delegate.close();
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
       return caller.getMessage();
     }
   }

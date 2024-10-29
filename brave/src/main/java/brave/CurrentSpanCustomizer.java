@@ -23,17 +23,20 @@ public final class CurrentSpanCustomizer implements SpanCustomizer {
   }
 
   /** {@inheritDoc} */
-  @Override public SpanCustomizer name(String name) {
+  @Override
+  public SpanCustomizer name(String name) {
     return tracer.currentSpanCustomizer().name(name);
   }
 
   /** {@inheritDoc} */
-  @Override public SpanCustomizer tag(String key, String value) {
+  @Override
+  public SpanCustomizer tag(String key, String value) {
     return tracer.currentSpanCustomizer().tag(key, value);
   }
 
   /** {@inheritDoc} */
-  @Override public SpanCustomizer annotate(String value) {
+  @Override
+  public SpanCustomizer annotate(String value) {
     return tracer.currentSpanCustomizer().annotate(value);
   }
 }

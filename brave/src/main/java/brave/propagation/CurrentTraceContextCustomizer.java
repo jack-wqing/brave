@@ -45,10 +45,12 @@ import brave.baggage.BaggagePropagationCustomizer;
 public interface CurrentTraceContextCustomizer {
   /** Use to avoid comparing against null references */
   CurrentTraceContextCustomizer NOOP = new CurrentTraceContextCustomizer() {
-    @Override public void customize(CurrentTraceContext.Builder builder) {
+    @Override
+    public void customize(CurrentTraceContext.Builder builder) {
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
       return "NoopCurrentTraceContextCustomizer{}";
     }
   };
