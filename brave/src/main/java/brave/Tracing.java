@@ -267,7 +267,7 @@ public abstract class Tracing implements Closeable {
      * and {@link Span.Kind#SERVER} span. Defaults to true.
      *
      * <p>Set this to false when the tracing system requires the opposite. For example, if
-     * ultimately spans are sent to Amazon X-Ray or Google Stackdriver Trace, you should set this to
+     * ultimately spans are sent to Amazon X-Ray or Google Stack driver Trace, you should set this to
      * false.
      *
      * <p>This is implicitly set to false when {@link Propagation.Factory#supportsJoin()} is false,
@@ -348,13 +348,15 @@ public abstract class Tracing implements Closeable {
   static final class LogSpanHandler extends SpanHandler {
     final Logger logger = Logger.getLogger(Tracer.class.getName());
 
-    @Override public boolean end(TraceContext context, MutableSpan span, Cause cause) {
+    @Override
+    public boolean end(TraceContext context, MutableSpan span, Cause cause) {
       if (!logger.isLoggable(Level.INFO)) return false;
       logger.info(span.toString());
       return true;
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
       return "LogSpanHandler{name=" + logger.getName() + "}";
     }
   }
@@ -407,35 +409,43 @@ public abstract class Tracing implements Closeable {
       CURRENT.compareAndSet(null, this);
     }
 
-    @Override public Tracer tracer() {
+    @Override
+    public Tracer tracer() {
       return tracer;
     }
 
-    @Override public Propagation<String> propagation() {
+    @Override
+    public Propagation<String> propagation() {
       return stringPropagation;
     }
 
-    @Override public Sampler sampler() {
+    @Override
+    public Sampler sampler() {
       return sampler;
     }
 
-    @Override public CurrentTraceContext currentTraceContext() {
+    @Override
+    public CurrentTraceContext currentTraceContext() {
       return currentTraceContext;
     }
 
-    @Override public boolean isNoop() {
+    @Override
+    public boolean isNoop() {
       return noop.get();
     }
 
-    @Override public void setNoop(boolean noop) {
+    @Override
+    public void setNoop(boolean noop) {
       this.noop.set(noop);
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
       return tracer.toString();
     }
 
-    @Override public void close() {
+    @Override
+    public void close() {
       // only set null if we are the outermost instance
       CURRENT.compareAndSet(this, null);
     }

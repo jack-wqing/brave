@@ -86,7 +86,8 @@ public final class StrictScopeDecorator implements ScopeDecorator, Closeable {
    * @since 5.11
    */
   // AssertionError to ensure test runners render the stack trace
-  @Override public void close() {
+  @Override
+  public void close() {
     // toArray is synchronized while iterators are not
     pendingScopes.expungeStaleEntries();
 

@@ -36,7 +36,8 @@ abstract class SamplerTest {
       .isCloseTo((long) (INPUT_SIZE * sampleProbability), expectedErrorProbability());
   }
 
-  @Test void zeroMeansDropAllTraces() {
+  @Test
+  void zeroMeansDropAllTraces() {
     final Sampler sampler = newSampler(0.0f);
 
     assertThat(new Random().longs(INPUT_SIZE).filter(sampler::isSampled).findAny()).isEmpty();

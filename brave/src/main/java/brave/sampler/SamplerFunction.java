@@ -35,5 +35,6 @@ public interface SamplerFunction<T> {
    * @return true to sample a new trace or false to deny. Null defers the decision.
    * @since 5.8
    */
-  @Nullable Boolean trySample(@Nullable T arg);
+  @Nullable
+  Boolean trySample(@Nullable T arg);
 }

@@ -254,7 +254,8 @@ public final class TraceContextOrSamplingFlags {
     return new Builder(type, value, effectiveExtra());
   }
 
-  @Override public String toString() {
+  @Override
+  public String toString() {
     List<Object> extra = effectiveExtra();
     StringBuilder result = new StringBuilder("Extracted{");
     String valueClass = value.getClass().getSimpleName();

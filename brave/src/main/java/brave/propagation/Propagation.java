@@ -298,6 +298,8 @@ public interface Propagation<K> {
      * @return the value of the field or {@code null}
      * @since 5.12
      */
-    @Nullable @Override String get(R request, String fieldName);
+    @Nullable
+    @Override
+    String get(R request, String fieldName);
   }
 }

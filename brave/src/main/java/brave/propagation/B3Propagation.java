@@ -210,32 +210,39 @@ public abstract class B3Propagation<K> implements Propagation<K> {
       injectorFactory = builder.injectorFactoryBuilder.build();
     }
 
-    @Override public List<String> keys() {
+    @Override
+    public List<String> keys() {
       return injectorFactory.keyNames();
     }
 
-    @Override public Propagation<String> get() {
+    @Override
+    public Propagation<String> get() {
       return this;
     }
 
-    @Override public boolean supportsJoin() {
+    @Override
+    public boolean supportsJoin() {
       return true;
     }
 
-    @Override public <R> Injector<R> injector(Setter<R, String> setter) {
+    @Override
+    public <R> Injector<R> injector(Setter<R, String> setter) {
       return injectorFactory.newInjector(setter);
     }
 
-    @Override public <R> Extractor<R> extractor(Getter<R, String> getter) {
+    @Override
+    public <R> Extractor<R> extractor(Getter<R, String> getter) {
       if (getter == null) throw new NullPointerException("getter == null");
       return new B3Extractor<R>(getter);
     }
 
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
       return injectorFactory.hashCode();
     }
 
-    @Override public boolean equals(Object o) {
+    @Override
+    public boolean equals(Object o) {
       if (o == this) return true;
       if (!(o instanceof B3Propagation.Factory)) return false;
 
@@ -255,7 +262,8 @@ public abstract class B3Propagation<K> implements Propagation<K> {
       this.getter = getter;
     }
 
-    @Override public TraceContextOrSamplingFlags extract(R request) {
+    @Override
+    public TraceContextOrSamplingFlags extract(R request) {
       if (request == null) throw new NullPointerException("request == null");
 
       // try to extract single-header format

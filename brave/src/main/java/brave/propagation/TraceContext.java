@@ -567,7 +567,8 @@ public final class TraceContext extends SamplingFlags {
    *
    * <p>The shared flag is included to have parity with the {@link #hashCode()}.
    */
-  @Override public boolean equals(Object o) {
+  @Override
+  public boolean equals(Object o) {
     if (o == this) return true;
     // Hack that allows WeakConcurrentMap to lookup without allocating a new object.
     if (o instanceof WeakReference) o = ((WeakReference) o).get();

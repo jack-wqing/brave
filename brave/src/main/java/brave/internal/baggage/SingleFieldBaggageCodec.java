@@ -27,19 +27,23 @@ public final class SingleFieldBaggageCodec implements BaggageCodec {
     this.keyNamesList = Collections.unmodifiableList(new ArrayList<String>(keyNames));
   }
 
-  @Override public List<String> extractKeyNames() {
+  @Override
+  public List<String> extractKeyNames() {
     return keyNamesList;
   }
 
-  @Override public List<String> injectKeyNames() {
+  @Override
+  public List<String> injectKeyNames() {
     return keyNamesList;
   }
 
-  @Override public boolean decode(BaggageField.ValueUpdater valueUpdater, String value) {
+  @Override
+  public boolean decode(BaggageField.ValueUpdater valueUpdater, String value) {
     return valueUpdater.updateValue(field, value);
   }
 
-  @Override public String encode(Map<String, String> values, TraceContext context) {
+  @Override
+  public String encode(Map<String, String> values, TraceContext context) {
     return field.getValue(context);
   }
 }

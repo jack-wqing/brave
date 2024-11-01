@@ -33,17 +33,24 @@ import java.util.concurrent.ConcurrentMap;
  * reference such as {@code javax.ws.rs.container.ResourceInfo}.
  * @since 4.4
  */
+
+/**
+ * 基于具体的方法注解或者方法，获取的基于抽样率或者速率的抽样
+ * @param <M>
+ */
 public abstract class DeclarativeSampler<M> implements SamplerFunction<M> {
   /** @since 5.8 */
   public interface ProbabilityOfMethod<M> {
     /** Returns null if there's no configured sample probability of this method */
-    @Nullable Float get(M method);
+    @Nullable
+    Float get(M method);
   }
 
   /** @since 5.8 */
   public interface RateOfMethod<M> {
     /** Returns null if there's no configured sample rate (in traces per second) of this method */
-    @Nullable Integer get(M method);
+    @Nullable
+    Integer get(M method);
   }
 
   /* @since 5.8 */
@@ -67,7 +74,8 @@ public abstract class DeclarativeSampler<M> implements SamplerFunction<M> {
    *
    * @since 5.8
    */
-  @Override public @Nullable Boolean trySample(@Nullable M method) {
+  @Override
+  public @Nullable Boolean trySample(@Nullable M method) {
     if (method == null) return null;
     Sampler sampler = methodToSamplers.get(method);
     if (sampler == NULL_SENTINEL) return null;
@@ -86,12 +94,14 @@ public abstract class DeclarativeSampler<M> implements SamplerFunction<M> {
 
   /** Prevents us from recomputing a method that had no configured factory */
   static final Sampler NULL_SENTINEL = new Sampler() {
-    @Override public boolean isSampled(long traceId) {
+    @Override
+    public boolean isSampled(long traceId) {
       throw new AssertionError();
     }
   };
 
-  @Nullable abstract Sampler samplerOfMethod(M method);
+  @Nullable
+  abstract Sampler samplerOfMethod(M method);
 
   static final class DeclarativeCountingSampler<M> extends DeclarativeSampler<M> {
     final ProbabilityOfMethod<M> probabilityOfMethod;
@@ -100,13 +110,15 @@ public abstract class DeclarativeSampler<M> implements SamplerFunction<M> {
       this.probabilityOfMethod = probabilityOfMethod;
     }
 
-    @Override Sampler samplerOfMethod(M method) {
+    @Override
+    Sampler samplerOfMethod(M method) {
       Float probability = probabilityOfMethod.get(method);
       if (probability == null) return null;
       return CountingSampler.create(probability);
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
       return "DeclarativeCountingSampler{" + probabilityOfMethod + "}";
     }
   }
@@ -118,13 +130,15 @@ public abstract class DeclarativeSampler<M> implements SamplerFunction<M> {
       this.rateOfMethod = rateOfMethod;
     }
 
-    @Override Sampler samplerOfMethod(M method) {
+    @Override
+    Sampler samplerOfMethod(M method) {
       Integer rate = rateOfMethod.get(method);
       if (rate == null) return null;
       return RateLimitingSampler.create(rate);
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
       return "DeclarativeRateLimitingSampler{" + rateOfMethod + "}";
     }
   }

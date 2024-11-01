@@ -53,7 +53,8 @@ abstract class WebMvcRuntime {
   }
 
   static final class WebMvc25 extends WebMvcRuntime {
-    @Override HttpTracing httpTracing(ApplicationContext ctx) {
+    @Override
+    HttpTracing httpTracing(ApplicationContext ctx) {
       // Spring 2.5 does not have a get bean by type interface. To remain compatible, lookup by name
       if (ctx.containsBean("httpTracing")) {
         Object bean = ctx.getBean("httpTracing");

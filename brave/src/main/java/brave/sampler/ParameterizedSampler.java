@@ -88,7 +88,8 @@ public final class ParameterizedSampler<P> implements SamplerFunction<P> {
    *
    * @since 5.8
    */
-  @Override public @Nullable Boolean trySample(P parameters) {
+  @Override
+  public @Nullable Boolean trySample(P parameters) {
     if (parameters == null) return null;
     for (R<P> rule : rules) {
       if (rule.matcher.matches(parameters)) {

@@ -21,12 +21,12 @@ import java.util.Map;
  * Holds one or more baggage fields in {@link TraceContext#extra()} or {@link
  * TraceContextOrSamplingFlags#extra()}.
  */
-public final class BaggageFields
-    extends MapExtra<BaggageField, String, BaggageFields, BaggageFields.Factory>
+public final class BaggageFields extends MapExtra<BaggageField, String, BaggageFields, BaggageFields.Factory>
     implements BaggageField.ValueUpdater {
 
   static final Mapper<Object, String> FIELD_TO_NAME = new Mapper<Object, String>() {
-    @Override public String map(Object input) {
+    @Override
+    public String map(Object input) {
       return ((BaggageField) input).name();
     }
   };
@@ -40,20 +40,20 @@ public final class BaggageFields
     return builder.maxDynamicEntries(maxDynamicEntries).build();
   }
 
-  static final class FactoryBuilder extends
-      MapExtraFactory.Builder<BaggageField, String, BaggageFields, Factory, FactoryBuilder> {
-    @Override protected Factory build() {
+  static final class FactoryBuilder extends MapExtraFactory.Builder<BaggageField, String, BaggageFields, Factory, FactoryBuilder> {
+    @Override
+    protected Factory build() {
       return new Factory(this);
     }
   }
 
-  public static final class Factory
-      extends MapExtraFactory<BaggageField, String, BaggageFields, Factory> {
+  public static final class Factory extends MapExtraFactory<BaggageField, String, BaggageFields, Factory> {
     Factory(FactoryBuilder builder) {
       super(builder);
     }
 
-    @Override public BaggageFields create() {
+    @Override
+    public BaggageFields create() {
       return new BaggageFields(this);
     }
   }
@@ -66,11 +66,13 @@ public final class BaggageFields
     return (Object[]) state;
   }
 
-  @Override public boolean updateValue(BaggageField field, String value) {
+  @Override
+  public boolean updateValue(BaggageField field, String value) {
     return put(field, value);
   }
 
-  @Nullable public String getValue(BaggageField key) {
+  @Nullable
+  public String getValue(BaggageField key) {
     return super.get(key);
   }
 

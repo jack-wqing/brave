@@ -96,14 +96,16 @@ public final class Matchers {
       this.matchers = Arrays.copyOf(matchers, matchers.length);
     }
 
-    @Override public boolean matches(P parameters) {
+    @Override
+    public boolean matches(P parameters) {
       for (Matcher<P> matcher : matchers) {
         if (!matcher.matches(parameters)) return false;
       }
       return true;
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
       return "And(" + Arrays.toString(matchers) + ")";
     }
   }
@@ -115,14 +117,16 @@ public final class Matchers {
       this.matchers = Arrays.copyOf(matchers, matchers.length);
     }
 
-    @Override public boolean matches(P parameters) {
+    @Override
+    public boolean matches(P parameters) {
       for (Matcher<P> matcher : matchers) {
         if (matcher.matches(parameters)) return true;
       }
       return false;
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
       return "Or(" + Arrays.toString(matchers) + ")";
     }
   }

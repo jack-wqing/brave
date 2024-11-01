@@ -44,10 +44,12 @@ import brave.propagation.Propagation;
 public interface BaggagePropagationCustomizer {
   /** Use to avoid comparing against null references */
   BaggagePropagationCustomizer NOOP = new BaggagePropagationCustomizer() {
-    @Override public void customize(BaggagePropagation.FactoryBuilder builder) {
+    @Override
+    public void customize(BaggagePropagation.FactoryBuilder builder) {
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
       return "NoopBaggagePropagationCustomizer{}";
     }
   };

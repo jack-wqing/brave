@@ -61,11 +61,13 @@ public final class MDCScopeDecorator {
   enum MDCContext implements CorrelationContext {
     INSTANCE;
 
-    @Override public String getValue(String name) {
+    @Override
+    public String getValue(String name) {
       return MDC.get(name);
     }
 
-    @Override public boolean update(String name, @Nullable String value) {
+    @Override
+    public boolean update(String name, @Nullable String value) {
       if (value != null) {
         MDC.put(name, value);
       } else {

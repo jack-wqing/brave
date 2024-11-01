@@ -18,8 +18,7 @@ import static brave.internal.collect.LongBitSet.isSet;
 import static brave.internal.collect.LongBitSet.setBit;
 import static brave.internal.extra.MapExtraFactory.MAX_DYNAMIC_ENTRIES;
 
-public class MapExtra<K, V, A extends MapExtra<K, V, A, F>,
-    F extends MapExtraFactory<K, V, A, F>> extends Extra<A, F> {
+public class MapExtra<K, V, A extends MapExtra<K, V, A, F>, F extends MapExtraFactory<K, V, A, F>> extends Extra<A, F> {
   protected MapExtra(F factory) {
     super(factory);
   }
@@ -99,7 +98,8 @@ public class MapExtra<K, V, A extends MapExtra<K, V, A, F>,
     }
   }
 
-  @Override protected void mergeStateKeepingOursOnConflict(A theirFields) {
+  @Override
+  protected void mergeStateKeepingOursOnConflict(A theirFields) {
     Object[] ourstate = state(), theirstate = theirFields.state();
 
     // scan first to see if we need to grow our state.

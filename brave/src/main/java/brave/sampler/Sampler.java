@@ -19,21 +19,25 @@ package brave.sampler;
 public abstract class Sampler {
 
   public static final Sampler ALWAYS_SAMPLE = new Sampler() {
-    @Override public boolean isSampled(long traceId) {
+    @Override
+    public boolean isSampled(long traceId) {
       return true;
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
       return "AlwaysSample";
     }
   };
 
   public static final Sampler NEVER_SAMPLE = new Sampler() {
-    @Override public boolean isSampled(long traceId) {
+    @Override
+    public boolean isSampled(long traceId) {
       return false;
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
       return "NeverSample";
     }
   };

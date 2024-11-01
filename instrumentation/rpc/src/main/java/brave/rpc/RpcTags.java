@@ -25,7 +25,8 @@ public final class RpcTags {
    * @since 5.11
    */
   public static final Tag<RpcRequest> METHOD = new Tag<RpcRequest>("rpc.method") {
-    @Override protected String parseValue(RpcRequest input, TraceContext context) {
+    @Override
+    protected String parseValue(RpcRequest input, TraceContext context) {
       return input.method();
     }
   };
@@ -38,7 +39,8 @@ public final class RpcTags {
    * @since 5.11
    */
   public static final Tag<RpcRequest> SERVICE = new Tag<RpcRequest>("rpc.service") {
-    @Override protected String parseValue(RpcRequest input, TraceContext context) {
+    @Override
+    protected String parseValue(RpcRequest input, TraceContext context) {
       return input.service();
     }
   };

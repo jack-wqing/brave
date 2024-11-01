@@ -37,13 +37,15 @@ public final class BaggageFields {
   public static final BaggageField TRACE_ID = new BaggageField("traceId", new TraceId());
 
   static final class TraceId extends BaggageContext.ReadOnly {
-    @Override public String getValue(BaggageField field, TraceContextOrSamplingFlags extracted) {
+    @Override
+    public String getValue(BaggageField field, TraceContextOrSamplingFlags extracted) {
       if (extracted.context() != null) return getValue(field, extracted.context());
       if (extracted.traceIdContext() != null) return extracted.traceIdContext().traceIdString();
       return null;
     }
 
-    @Override public String getValue(BaggageField field, TraceContext context) {
+    @Override
+    public String getValue(BaggageField field, TraceContext context) {
       return context.traceIdString();
     }
   }
@@ -57,12 +59,14 @@ public final class BaggageFields {
   public static final BaggageField PARENT_ID = new BaggageField("parentId", new ParentId());
 
   static final class ParentId extends BaggageContext.ReadOnly {
-    @Override public String getValue(BaggageField field, TraceContextOrSamplingFlags extracted) {
+    @Override
+    public String getValue(BaggageField field, TraceContextOrSamplingFlags extracted) {
       if (extracted.context() != null) return getValue(field, extracted.context());
       return null;
     }
 
-    @Override public String getValue(BaggageField field, TraceContext context) {
+    @Override
+    public String getValue(BaggageField field, TraceContext context) {
       return context.parentIdString();
     }
   }
@@ -76,12 +80,14 @@ public final class BaggageFields {
   public static final BaggageField SPAN_ID = new BaggageField("spanId", new SpanId());
 
   static final class SpanId extends BaggageContext.ReadOnly {
-    @Override public String getValue(BaggageField field, TraceContextOrSamplingFlags extracted) {
+    @Override
+    public String getValue(BaggageField field, TraceContextOrSamplingFlags extracted) {
       if (extracted.context() != null) return getValue(field, extracted.context());
       return null;
     }
 
-    @Override public String getValue(BaggageField field, TraceContext context) {
+    @Override
+    public String getValue(BaggageField field, TraceContext context) {
       return context.spanIdString();
     }
   }
@@ -97,15 +103,18 @@ public final class BaggageFields {
   public static final BaggageField SAMPLED = new BaggageField("sampled", new Sampled());
 
   static final class Sampled extends BaggageContext.ReadOnly {
-    @Override public String getValue(BaggageField field, TraceContextOrSamplingFlags extracted) {
+    @Override
+    public String getValue(BaggageField field, TraceContextOrSamplingFlags extracted) {
       return getValue(extracted.sampled());
     }
 
-    @Override public String getValue(BaggageField field, TraceContext context) {
+    @Override
+    public String getValue(BaggageField field, TraceContext context) {
       return getValue(context.sampled());
     }
 
-    @Nullable static String getValue(@Nullable Boolean sampled) {
+    @Nullable
+    static String getValue(@Nullable Boolean sampled) {
       return sampled != null ? sampled.toString() : null;
     }
   }
@@ -131,11 +140,13 @@ public final class BaggageFields {
       this.value = value;
     }
 
-    @Override public String getValue(BaggageField field, TraceContextOrSamplingFlags extracted) {
+    @Override
+    public String getValue(BaggageField field, TraceContextOrSamplingFlags extracted) {
       return value;
     }
 
-    @Override public String getValue(BaggageField field, TraceContext context) {
+    @Override
+    public String getValue(BaggageField field, TraceContext context) {
       return value;
     }
   }

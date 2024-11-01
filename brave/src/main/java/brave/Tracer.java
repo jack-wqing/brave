@@ -450,7 +450,8 @@ public class Tracer {
    * <p>When entering user code, prefer {@link #currentSpanCustomizer()} as it is a stable type and
    * will never return null.
    */
-  @Nullable public Span currentSpan() {
+  @Nullable
+  public Span currentSpan() {
     TraceContext context = currentTraceContext.get();
     if (context == null) return null;
     // Returns a lazy span to reduce overhead when tracer.currentSpan() is invoked just to see if
@@ -533,8 +534,7 @@ public class Tracer {
    * @see #nextSpan(SamplerFunction, Object)
    * @since 5.10
    */
-  public <T> Span nextSpanWithParent(SamplerFunction<T> samplerFunction, T arg,
-    @Nullable TraceContext parent) {
+  public <T> Span nextSpanWithParent(SamplerFunction<T> samplerFunction, T arg, @Nullable TraceContext parent) {
     return _toSpan(parent, nextContext(samplerFunction, arg, parent));
   }
 
@@ -584,16 +584,19 @@ public class Tracer {
     }
 
     /** No exceptions are thrown when unbinding a span scope. */
-    @Override public void close() {
+    @Override
+    public void close() {
       scope.close();
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
       return scope.toString();
     }
   }
 
-  @Override public String toString() {
+  @Override
+  public String toString() {
     TraceContext currentSpan = currentTraceContext.get();
     return "Tracer{"
       + (currentSpan != null ? ("currentSpan=" + currentSpan + ", ") : "")

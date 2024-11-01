@@ -220,7 +220,8 @@ public abstract class Platform implements Clock {
       return new AssertionError(message, cause);
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
       return "Jre7{}";
     }
   }

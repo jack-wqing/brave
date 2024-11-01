@@ -84,7 +84,8 @@ public class ThreadLocalCurrentTraceContext extends CurrentTraceContext { // not
     return local.get();
   }
 
-  @Override public Scope newScope(@Nullable TraceContext currentSpan) {
+  @Override
+  public Scope newScope(@Nullable TraceContext currentSpan) {
     final TraceContext previous = local.get();
     local.set(currentSpan);
     Scope result = previous != null ? new RevertToPreviousScope(local, previous) : revertToNull;

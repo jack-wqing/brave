@@ -39,13 +39,15 @@ public final class DelegatingTracingFilter implements Filter {
     }
   }
 
-  @Override public void init(FilterConfig filterConfig) {
+  @Override
+  public void init(FilterConfig filterConfig) {
     ApplicationContext ctx = getRequiredWebApplicationContext(filterConfig.getServletContext());
     HttpTracing httpTracing = WebMvcRuntime.get().httpTracing(ctx);
     delegate = TracingFilter.create(httpTracing);
   }
 
-  @Override public void destroy() {
+  @Override
+  public void destroy() {
     // TracingFilter is stateless, so nothing to destroy
   }
 }

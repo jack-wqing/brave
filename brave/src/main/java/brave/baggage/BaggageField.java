@@ -103,11 +103,13 @@ public final class BaggageField {
   public interface ValueUpdater {
     /** @since 5.12 */
     ValueUpdater NOOP = new ValueUpdater() {
-      @Override public boolean updateValue(BaggageField field, String value) {
+      @Override
+      public boolean updateValue(BaggageField field, String value) {
         return false;
       }
 
-      @Override public String toString() {
+      @Override
+      public String toString() {
         return "NoopValueUpdater{}";
       }
     };
@@ -165,7 +167,8 @@ public final class BaggageField {
    *
    * @since 5.12
    */
-  @Nullable public static Map<String, String> getAllValues() {
+  @Nullable
+  public static Map<String, String> getAllValues() {
     return getAllValues(currentTraceContext());
   }
 
@@ -175,7 +178,8 @@ public final class BaggageField {
    *
    * @since 5.11
    */
-  @Nullable public static BaggageField getByName(@Nullable TraceContext context, String name) {
+  @Nullable
+  public static BaggageField getByName(@Nullable TraceContext context, String name) {
     if (context == null) return null;
     return ExtraBaggageContext.getFieldByName(context, validateName(name));
   }
@@ -186,7 +190,8 @@ public final class BaggageField {
    *
    * @since 5.11
    */
-  @Nullable public static BaggageField getByName(TraceContextOrSamplingFlags extracted,
+  @Nullable
+  public static BaggageField getByName(TraceContextOrSamplingFlags extracted,
       String name) {
     if (extracted == null) throw new NullPointerException("extracted == null");
     return ExtraBaggageContext.getFieldByName(extracted, validateName(name));
@@ -200,7 +205,8 @@ public final class BaggageField {
    *
    * @since 5.11
    */
-  @Nullable public static BaggageField getByName(String name) {
+  @Nullable
+  public static BaggageField getByName(String name) {
     return getByName(currentTraceContext(), name);
   }
 
@@ -236,7 +242,8 @@ public final class BaggageField {
    *
    * @since 5.11
    */
-  @Nullable public String getValue(@Nullable TraceContext context) {
+  @Nullable
+  public String getValue(@Nullable TraceContext context) {
     if (context == null) return null;
     return this.context.getValue(this, context);
   }
@@ -248,7 +255,8 @@ public final class BaggageField {
    *
    * @since 5.11
    */
-  @Nullable public String getValue() {
+  @Nullable
+  public String getValue() {
     return getValue(currentTraceContext());
   }
 
@@ -258,7 +266,8 @@ public final class BaggageField {
    *
    * @since 5.11
    */
-  @Nullable public String getValue(TraceContextOrSamplingFlags extracted) {
+  @Nullable
+  public String getValue(TraceContextOrSamplingFlags extracted) {
     if (extracted == null) throw new NullPointerException("extracted == null");
     return context.getValue(this, extracted);
   }
@@ -304,19 +313,22 @@ public final class BaggageField {
     return updateValue(currentTraceContext(), value);
   }
 
-  @Override public String toString() {
+  @Override
+  public String toString() {
     return "BaggageField{" + name + "}";
   }
 
   /** Returns true for any baggage field with the same name (case insensitive). */
-  @Override public final boolean equals(Object o) {
+  @Override
+  public final boolean equals(Object o) {
     if (o == this) return true;
     if (!(o instanceof BaggageField)) return false;
     return lcName.equals(((BaggageField) o).lcName);
   }
 
   /** Returns the same value for any baggage field with the same name (case insensitive). */
-  @Override public final int hashCode() {
+  @Override
+  public final int hashCode() {
     return lcName.hashCode();
   }
 
@@ -327,7 +339,8 @@ public final class BaggageField {
     return name;
   }
 
-  @Nullable static TraceContext currentTraceContext() {
+  @Nullable
+  static TraceContext currentTraceContext() {
     Tracing tracing = Tracing.current();
     return tracing != null ? tracing.currentTraceContext().get() : null;
   }

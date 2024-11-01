@@ -10,11 +10,13 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.data.Percentage.withPercentage;
 
 class BoundarySamplerTest extends SamplerTest {
-  @Override Sampler newSampler(float probability) {
+  @Override
+  Sampler newSampler(float probability) {
     return BoundarySampler.create(probability);
   }
 
-  @Override Percentage expectedErrorProbability() {
+  @Override
+  Percentage expectedErrorProbability() {
     return withPercentage(10);
   }
 

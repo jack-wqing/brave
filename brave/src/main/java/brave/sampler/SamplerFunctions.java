@@ -31,12 +31,14 @@ public final class SamplerFunctions {
       this.delegate = delegate;
     }
 
-    @Override public Boolean trySample(T arg) {
+    @Override
+    public Boolean trySample(T arg) {
       if (arg == null) return null;
       return delegate.trySample(arg);
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
       return "NullSafe(" + delegate + ")";
     }
   }

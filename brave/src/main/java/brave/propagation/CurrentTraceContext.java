@@ -241,7 +241,8 @@ public abstract class CurrentTraceContext {
   public <C> Callable<C> wrap(final Callable<C> task) {
     final TraceContext invocationContext = get();
     class CurrentTraceContextCallable implements Callable<C> {
-      @Override public C call() throws Exception {
+      @Override
+      public C call() throws Exception {
         Scope scope = maybeScope(invocationContext);
         try {
           return task.call();
@@ -257,7 +258,8 @@ public abstract class CurrentTraceContext {
   public Runnable wrap(final Runnable task) {
     final TraceContext invocationContext = get();
     class CurrentTraceContextRunnable implements Runnable {
-      @Override public void run() {
+      @Override
+      public void run() {
         Scope scope = maybeScope(invocationContext);
         try {
           task.run();
@@ -286,6 +288,7 @@ public abstract class CurrentTraceContext {
    * Decorates the input such that the {@link #get() current trace context} at the time a task is
    * scheduled is made current when the task is executed.
    */
+
   public ExecutorService executorService(final ExecutorService delegate) {
     class CurrentTraceContextExecutorService extends brave.internal.WrappingExecutorService {
 
@@ -293,11 +296,13 @@ public abstract class CurrentTraceContext {
         return delegate;
       }
 
-      @Override protected <C> Callable<C> wrap(Callable<C> task) {
+      @Override
+      protected <C> Callable<C> wrap(Callable<C> task) {
         return CurrentTraceContext.this.wrap(task);
       }
 
-      @Override protected Runnable wrap(Runnable task) {
+      @Override
+      protected Runnable wrap(Runnable task) {
         return CurrentTraceContext.this.wrap(task);
       }
     }

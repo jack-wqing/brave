@@ -42,14 +42,16 @@ final class RealSpan extends Span {
     return start(clock.currentTimeMicroseconds());
   }
 
-  @Override public Span start(long timestamp) {
+  @Override
+  public Span start(long timestamp) {
     synchronized (state) {
       state.startTimestamp(timestamp);
     }
     return this;
   }
 
-  @Override public Span name(String name) {
+  @Override
+  public Span name(String name) {
     synchronized (state) {
       state.name(name);
     }

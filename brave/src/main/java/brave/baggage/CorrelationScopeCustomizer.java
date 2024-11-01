@@ -43,10 +43,12 @@ import brave.propagation.Propagation;
 public interface CorrelationScopeCustomizer {
   /** Use to avoid comparing against null references */
   CorrelationScopeCustomizer NOOP = new CorrelationScopeCustomizer() {
-    @Override public void customize(CorrelationScopeDecorator.Builder builder) {
+    @Override
+    public void customize(CorrelationScopeDecorator.Builder builder) {
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
       return "NoopCorrelationScopeCustomizer{}";
     }
   };

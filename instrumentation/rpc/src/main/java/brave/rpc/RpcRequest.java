@@ -36,7 +36,8 @@ public abstract class RpcRequest extends Request {
    * @return the RPC method name or null if unreadable.
    * @since 5.8
    */
-  @Nullable public abstract String method();
+  @Nullable
+  public abstract String method();
 
   /**
    * The fully-qualified, case-sensitive service path. Prefer the name defined in IDL to any mapped

@@ -78,8 +78,7 @@ public class OrphanTracker extends SpanHandler {
 
   final MutableSpan defaultSpan;
   final Clock clock;
-  final WeakConcurrentMap<MutableSpan, Throwable> spanToCaller =
-    new WeakConcurrentMap<MutableSpan, Throwable>();
+  final WeakConcurrentMap<MutableSpan, Throwable> spanToCaller = new WeakConcurrentMap<MutableSpan, Throwable>();
   final Level logLevel;
 
   OrphanTracker(Builder builder) {
@@ -103,7 +102,8 @@ public class OrphanTracker extends SpanHandler {
    * thread). While this class is used for troubleshooting, it should do the least work possible to
    * prevent harm to arbitrary callers.
    */
-  @Override public boolean end(TraceContext context, MutableSpan span, Cause cause) {
+  @Override
+  public boolean end(TraceContext context, MutableSpan span, Cause cause) {
     Throwable caller = spanToCaller.remove(span);
     if (cause != Cause.ORPHANED) return true;
     boolean allocatedButNotUsed = span.equals(new MutableSpan(context, defaultSpan));
@@ -126,7 +126,8 @@ public class OrphanTracker extends SpanHandler {
     return LoggerHolder.LOG;
   }
 
-  @Override public String toString() {
+  @Override
+  public String toString() {
     return "OrphanTracker{}";
   }
 

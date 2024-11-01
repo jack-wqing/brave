@@ -96,7 +96,8 @@ public abstract class Extra<E extends Extra<E, F>, F extends ExtraFactory<E, F>>
   protected abstract String stateString();
 
   // Implemented for equals when nothing was extracted
-  @Override public final boolean equals(Object o) {
+  @Override
+  public final boolean equals(Object o) {
     if (o == this) return true;
     // Extra fields should be equal on exact type, not subtype.
     // Otherwise, consolidation doesn't work
@@ -104,11 +105,13 @@ public abstract class Extra<E extends Extra<E, F>, F extends ExtraFactory<E, F>>
     return stateEquals(((E) o).state);
   }
 
-  @Override public final int hashCode() {
+  @Override
+  public final int hashCode() {
     return stateHashCode();
   }
 
-  @Override public final String toString() {
+  @Override
+  public final String toString() {
     return getClass().getSimpleName() + "{" + stateString() + "}";
   }
 

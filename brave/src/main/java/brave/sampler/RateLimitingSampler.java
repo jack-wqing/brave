@@ -57,7 +57,8 @@ public class RateLimitingSampler extends Sampler {
     this.nextReset = new AtomicLong(now + NANOS_PER_SECOND);
   }
 
-  @Override public boolean isSampled(long ignoredTraceId) {
+  @Override
+  public boolean isSampled(long ignoredTraceId) {
     long now = platform.nanoTime(), updateAt = nextReset.get();
 
     // First task is to determine if this request is later than the one second sampling window
@@ -95,7 +96,8 @@ public class RateLimitingSampler extends Sampler {
       this.tracesPerSecond = tracesPerSecond;
     }
 
-    @Override int max(long nanosUntilResetIgnored) {
+    @Override
+    int max(long nanosUntilResetIgnored) {
       return tracesPerSecond;
     }
   }
@@ -123,7 +125,8 @@ public class RateLimitingSampler extends Sampler {
       }
     }
 
-    @Override int max(long nanosUntilReset) {
+    @Override
+    int max(long nanosUntilReset) {
       // Check to see if we are in the first or last interval
       if (nanosUntilReset > NANOS_PER_SECOND - NANOS_PER_DECISECOND) return max[0];
       if (nanosUntilReset < NANOS_PER_DECISECOND) return max[9];

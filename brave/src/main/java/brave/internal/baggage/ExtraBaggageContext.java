@@ -39,26 +39,31 @@ public final class ExtraBaggageContext extends BaggageContext {
     return getFieldByName(getAllFields(extracted.extra()), name);
   }
 
-  @Nullable public static BaggageField getFieldByName(TraceContext context, String name) {
+  @Nullable
+  public static BaggageField getFieldByName(TraceContext context, String name) {
     return getFieldByName(getAllFields(context.extra()), name);
   }
 
-  @Override public String getValue(BaggageField field, TraceContextOrSamplingFlags extracted) {
+  @Override
+  public String getValue(BaggageField field, TraceContextOrSamplingFlags extracted) {
     if (extracted.context() != null) return getValue(field, extracted.context());
     return getValue(field, extracted.extra());
   }
 
-  @Override public String getValue(BaggageField field, TraceContext context) {
+  @Override
+  public String getValue(BaggageField field, TraceContext context) {
     return getValue(field, context.extra());
   }
 
-  @Override public boolean updateValue(BaggageField field, TraceContextOrSamplingFlags extracted,
+  @Override
+  public boolean updateValue(BaggageField field, TraceContextOrSamplingFlags extracted,
     @Nullable String value) {
     if (extracted.context() != null) return updateValue(field, extracted.context(), value);
     return updateValue(field, extracted.extra(), value);
   }
 
-  @Override public boolean updateValue(BaggageField field, TraceContext context, String value) {
+  @Override
+  public boolean updateValue(BaggageField field, TraceContext context, String value) {
     return updateValue(field, context.extra(), value);
   }
 
@@ -74,7 +79,8 @@ public final class ExtraBaggageContext extends BaggageContext {
     return extra.getAllValues();
   }
 
-  @Nullable static BaggageField getFieldByName(List<BaggageField> fields, String name) {
+  @Nullable
+  static BaggageField getFieldByName(List<BaggageField> fields, String name) {
     if (name == null) throw new NullPointerException("name == null");
     name = name.trim();
     if (name.isEmpty()) throw new IllegalArgumentException("name is empty");
@@ -86,7 +92,8 @@ public final class ExtraBaggageContext extends BaggageContext {
     return null;
   }
 
-  @Nullable static String getValue(BaggageField field, List<Object> extraList) {
+  @Nullable
+  static String getValue(BaggageField field, List<Object> extraList) {
     BaggageFields extra = findExtra(BaggageFields.class, extraList);
     if (extra == null) return null;
     return extra.getValue(field);

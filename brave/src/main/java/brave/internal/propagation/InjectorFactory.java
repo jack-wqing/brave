@@ -271,7 +271,8 @@ public final class InjectorFactory {
       this.setter = setter;
     }
 
-    @Override public void inject(TraceContext context, R request) {
+    @Override
+    public void inject(TraceContext context, R request) {
       injectorFunction.inject(setter, context, request);
     }
 
@@ -283,14 +284,16 @@ public final class InjectorFactory {
       return h;
     }
 
-    @Override public boolean equals(Object o) {
+    @Override
+    public boolean equals(Object o) {
       if (o == this) return true;
       if (!(o instanceof RemoteInjector)) return false;
       RemoteInjector<?> that = (RemoteInjector<?>) o;
       return setter.equals(that.setter) && injectorFunction.equals(that.injectorFunction);
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
       return "Injector{setter=" + setter + ", injectorFunction=" + injectorFunction + "}";
     }
   }
@@ -321,29 +324,34 @@ public final class InjectorFactory {
       this.keyNames = Collections.unmodifiableList(new ArrayList<String>(keyNames));
     }
 
-    @Override public List<String> keyNames() {
+    @Override
+    public List<String> keyNames() {
       return keyNames;
     }
 
-    @Override public <R> void inject(Setter<R, String> setter, TraceContext context, R request) {
+    @Override
+    public <R> void inject(Setter<R, String> setter, TraceContext context, R request) {
       for (InjectorFunction injectorFunction : injectorFunctions) {
         injectorFunction.inject(setter, context, request);
       }
     }
 
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
       int h = 1000003;
       h ^= Arrays.hashCode(injectorFunctions);
       return h;
     }
 
-    @Override public boolean equals(Object o) {
+    @Override
+    public boolean equals(Object o) {
       if (o == this) return true;
       if (!(o instanceof CompositeInjectorFunction)) return false;
       return Arrays.equals(injectorFunctions, ((CompositeInjectorFunction) o).injectorFunctions);
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
       return Arrays.toString(injectorFunctions);
     }
   }

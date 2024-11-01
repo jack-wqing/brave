@@ -160,7 +160,8 @@ public final class BaggagePropagation<K> implements Propagation<K> {
     final BaggageFields.Factory baggageFactory;
     final BaggagePropagationConfig[] configs;
     final String[] localFieldNames;
-    @Nullable final Extra extra;
+    @Nullable
+    final Extra extra;
 
     Factory(FactoryBuilder factoryBuilder) {
       this.delegateFactory = factoryBuilder.delegate;
@@ -188,32 +189,39 @@ public final class BaggagePropagation<K> implements Propagation<K> {
       this.localFieldNames = localFieldNames.toArray(new String[0]);
     }
 
-    @Override public BaggagePropagation<String> get() {
+    @Override
+    public BaggagePropagation<String> get() {
       return new BaggagePropagation<String>(this);
     }
 
-    @Override public TraceContext decorate(TraceContext context) {
+    @Override
+    public TraceContext decorate(TraceContext context) {
       TraceContext result = delegateFactory.decorate(context);
       return baggageFactory.decorate(result);
     }
 
-    @Override public boolean supportsJoin() {
+    @Override
+    public boolean supportsJoin() {
       return delegateFactory.supportsJoin();
     }
 
-    @Override public boolean requires128BitTraceId() {
+    @Override
+    public boolean requires128BitTraceId() {
       return delegateFactory.requires128BitTraceId();
     }
 
-    @Override public List<String> keys() {
+    @Override
+    public List<String> keys() {
       return delegate.keys();
     }
 
-    @Override public <R> Injector<R> injector(Setter<R, String> setter) {
+    @Override
+    public <R> Injector<R> injector(Setter<R, String> setter) {
       return new BaggageInjector<R>(this, setter);
     }
 
-    @Override public <R> Extractor<R> extractor(Getter<R, String> getter) {
+    @Override
+    public <R> Extractor<R> extractor(Getter<R, String> getter) {
       return new BaggageExtractor<R>(this, getter);
     }
   }
@@ -228,7 +236,8 @@ public final class BaggagePropagation<K> implements Propagation<K> {
    * Only returns trace context keys. Baggage field names are not returned to ensure tools don't
    * delete them. This is to support users accessing baggage without Brave apis (ex via headers).
    */
-  @Override public List<K> keys() {
+  @Override
+  public List<K> keys() {
     return delegate.keys();
   }
 

@@ -21,23 +21,28 @@ public interface BaggageCodec {
    * Use this when configuration results in no codec needed.
    */
   BaggageCodec NOOP = new BaggageCodec() {
-    @Override public List<String> extractKeyNames() {
+    @Override
+    public List<String> extractKeyNames() {
       return Collections.emptyList();
     }
 
-    @Override public List<String> injectKeyNames() {
+    @Override
+    public List<String> injectKeyNames() {
       return Collections.emptyList();
     }
 
-    @Override public boolean decode(ValueUpdater valueUpdater, String value) {
+    @Override
+    public boolean decode(ValueUpdater valueUpdater, String value) {
       return false;
     }
 
-    @Override public String encode(Map<String, String> values, TraceContext context) {
+    @Override
+    public String encode(Map<String, String> values, TraceContext context) {
       return null;
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
       return "NoopBaggageCodec";
     }
   };
@@ -82,5 +87,6 @@ public interface BaggageCodec {
    * @return an input to {@link Setter#put(Object, Object, String)}
    * @see #injectKeyNames()
    */
-  @Nullable String encode(Map<String, String> values, TraceContext context);
+  @Nullable
+  String encode(Map<String, String> values, TraceContext context);
 }
