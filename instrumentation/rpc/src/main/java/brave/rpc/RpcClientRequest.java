@@ -21,20 +21,24 @@ import brave.propagation.TraceContext.Injector;
  */
 public abstract class RpcClientRequest extends RpcRequest {
   static final RemoteSetter<RpcClientRequest> SETTER = new RemoteSetter<RpcClientRequest>() {
-    @Override public Kind spanKind() {
+    @Override
+    public Kind spanKind() {
       return Kind.CLIENT;
     }
 
-    @Override public void put(RpcClientRequest request, String key, String value) {
+    @Override
+    public void put(RpcClientRequest request, String key, String value) {
       request.propagationField(key, value);
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
       return "RpcClientRequest::propagationField";
     }
   };
 
-  @Override public final Kind spanKind() {
+  @Override
+  public final Kind spanKind() {
     return Kind.CLIENT;
   }
 

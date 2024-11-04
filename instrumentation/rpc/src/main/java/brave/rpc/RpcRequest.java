@@ -58,7 +58,8 @@ public abstract class RpcRequest extends Request {
    * @return the RPC namespace or null if unreadable.
    * @since 5.8
    */
-  @Nullable public abstract String service();
+  @Nullable
+  public abstract String service();
 
   /**
    * The timestamp in epoch microseconds of the beginning of this request or zero to take this

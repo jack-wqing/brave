@@ -11,6 +11,9 @@ import io.grpc.Metadata.Key;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * 对于grpc propagation得 string to Metadata.Key得转换
+ */
 final class GrpcPropagation {
   /** Creates constant keys for use in propagating trace identifiers or baggage. */
   static Map<String, Key<String>> nameToKey(Propagation<String> propagation) {

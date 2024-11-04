@@ -42,11 +42,13 @@ public final class Tags {
    * @since 5.11
    */
   public static final Tag<BaggageField> BAGGAGE_FIELD = new Tag<BaggageField>("baggageField") {
-    @Override protected String key(BaggageField input) {
+    @Override
+    protected String key(BaggageField input) {
       return input.name();
     }
 
-    @Override protected String parseValue(BaggageField input, TraceContext context) {
+    @Override
+    protected String parseValue(BaggageField input, TraceContext context) {
       return input.getValue(context);
     }
   };

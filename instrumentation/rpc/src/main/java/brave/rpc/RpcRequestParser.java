@@ -45,7 +45,8 @@ public interface RpcRequestParser {
    * method or service. This also tags "rpc.service" and "rpc.method" when present.
    */
   class Default implements RpcRequestParser {
-    @Override public void parse(RpcRequest req, TraceContext context, SpanCustomizer span) {
+    @Override
+    public void parse(RpcRequest req, TraceContext context, SpanCustomizer span) {
       String service = req.service();
       String method = req.method();
       if (service == null && method == null) return;

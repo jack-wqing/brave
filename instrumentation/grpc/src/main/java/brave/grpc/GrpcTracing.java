@@ -11,6 +11,9 @@ import io.grpc.Metadata;
 import io.grpc.ServerInterceptor;
 import java.util.Map;
 
+/**
+ * grpc client / server interceptor
+ */
 public final class GrpcTracing {
   public static GrpcTracing create(Tracing tracing) {
     return newBuilder(tracing).build();

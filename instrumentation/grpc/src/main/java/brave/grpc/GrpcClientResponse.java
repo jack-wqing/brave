@@ -36,16 +36,20 @@ public final class GrpcClientResponse extends RpcClientResponse implements GrpcR
   }
 
   /** Returns the {@link #status()} */
-  @Override public Status unwrap() {
+  @Override
+  public Status unwrap() {
     return status;
   }
 
-  @Override public GrpcClientRequest request() {
+  @Override
+  public GrpcClientRequest request() {
     return request;
   }
 
   /** Returns {@link Status#getCause()} */
-  @Override @Nullable public Throwable error() {
+  @Override
+  @Nullable
+  public Throwable error() {
     return status.getCause();
   }
 
@@ -53,7 +57,9 @@ public final class GrpcClientResponse extends RpcClientResponse implements GrpcR
    * Returns the string form of the {@link Status#getCode()} or {@code null} when not {@link
    * Status#isOk()} or {@link #error()}.
    */
-  @Override @Nullable public String errorCode() {
+  @Override
+  @Nullable
+  public String errorCode() {
     if (status.isOk()) return null;
     return status.getCode().name();
   }
@@ -63,7 +69,8 @@ public final class GrpcClientResponse extends RpcClientResponse implements GrpcR
    *
    * @since 5.12
    */
-  @Override public Metadata headers() {
+  @Override
+  public Metadata headers() {
     return headers;
   }
 
@@ -72,7 +79,8 @@ public final class GrpcClientResponse extends RpcClientResponse implements GrpcR
    *
    * @since 5.12
    */
-  @Override public Status status() {
+  @Override
+  public Status status() {
     return status;
   }
 
@@ -81,7 +89,8 @@ public final class GrpcClientResponse extends RpcClientResponse implements GrpcR
    *
    * @since 5.12
    */
-  @Override public Metadata trailers() {
+  @Override
+  public Metadata trailers() {
     return trailers;
   }
 }

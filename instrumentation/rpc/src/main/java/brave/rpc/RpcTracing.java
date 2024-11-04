@@ -296,12 +296,14 @@ public class RpcTracing implements Closeable {
    *
    * @since 5.9
    */
-  @Nullable public static RpcTracing current() {
+  @Nullable
+  public static RpcTracing current() {
     return CURRENT.get();
   }
 
   /** @since 5.9 */
-  @Override public void close() {
+  @Override
+  public void close() {
     // only set null if we are the outer-most instance
     CURRENT.compareAndSet(this, null);
   }

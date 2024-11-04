@@ -53,7 +53,8 @@ public final class RpcTags {
    * @since 5.11
    */
   public static final Tag<RpcResponse> ERROR_CODE = new Tag<RpcResponse>("rpc.error_code") {
-    @Override protected String parseValue(RpcResponse input, TraceContext context) {
+    @Override
+    protected String parseValue(RpcResponse input, TraceContext context) {
       return input.errorCode();
     }
   };

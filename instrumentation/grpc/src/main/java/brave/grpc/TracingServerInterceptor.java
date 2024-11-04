@@ -48,8 +48,7 @@ final class TracingServerInterceptor implements ServerInterceptor {
     Throwable error = null;
     Scope scope = currentTraceContext.maybeScope(span.context());
     try {
-      result =
-        next.startCall(new TracingServerCall<ReqT, RespT>(call, span, spanRef, request), headers);
+      result = next.startCall(new TracingServerCall<ReqT, RespT>(call, span, spanRef, request), headers);
     } catch (RuntimeException e) {
       error = e;
       throw e;
@@ -86,7 +85,8 @@ final class TracingServerInterceptor implements ServerInterceptor {
       this.request = request;
     }
 
-    @Override public void request(int numMessages) {
+    @Override
+    public void request(int numMessages) {
       Scope scope = currentTraceContext.maybeScope(context);
       try {
         delegate().request(numMessages);
@@ -95,7 +95,8 @@ final class TracingServerInterceptor implements ServerInterceptor {
       }
     }
 
-    @Override public void sendHeaders(Metadata headers) {
+    @Override
+    public void sendHeaders(Metadata headers) {
       Scope scope = currentTraceContext.maybeScope(context);
       try {
         delegate().sendHeaders(headers);
@@ -106,7 +107,8 @@ final class TracingServerInterceptor implements ServerInterceptor {
       this.headers.merge(headers);
     }
 
-    @Override public void sendMessage(RespT message) {
+    @Override
+    public void sendMessage(RespT message) {
       Scope scope = currentTraceContext.maybeScope(context);
       try {
         delegate().sendMessage(message);
@@ -115,7 +117,8 @@ final class TracingServerInterceptor implements ServerInterceptor {
       }
     }
 
-    @Override public void close(Status status, Metadata trailers) {
+    @Override
+    public void close(Status status, Metadata trailers) {
       // See /instrumentation/grpc/RATIONALE.md for why we don't catch exceptions from the delegate
       GrpcServerResponse response = new GrpcServerResponse(request, headers, status, trailers);
       Span span = spanRef.getAndSet(null);
@@ -144,7 +147,8 @@ final class TracingServerInterceptor implements ServerInterceptor {
       this.spanRef = spanRef;
     }
 
-    @Override public void onMessage(RespT message) {
+    @Override
+    public void onMessage(RespT message) {
       Scope scope = currentTraceContext.maybeScope(context);
       try {
         delegate().onMessage(message);
@@ -153,7 +157,8 @@ final class TracingServerInterceptor implements ServerInterceptor {
       }
     }
 
-    @Override public void onHalfClose() {
+    @Override
+    public void onHalfClose() {
       Scope scope = currentTraceContext.maybeScope(context);
       Throwable error = null;
       try {
@@ -178,7 +183,8 @@ final class TracingServerInterceptor implements ServerInterceptor {
       }
     }
 
-    @Override public void onCancel() {
+    @Override
+    public void onCancel() {
       Scope scope = currentTraceContext.maybeScope(context);
       try {
         delegate().onCancel();
@@ -187,7 +193,8 @@ final class TracingServerInterceptor implements ServerInterceptor {
       }
     }
 
-    @Override public void onComplete() {
+    @Override
+    public void onComplete() {
       Scope scope = currentTraceContext.maybeScope(context);
       try {
         delegate().onComplete();
@@ -196,7 +203,8 @@ final class TracingServerInterceptor implements ServerInterceptor {
       }
     }
 
-    @Override public void onReady() {
+    @Override
+    public void onReady() {
       Scope scope = currentTraceContext.maybeScope(context);
       try {
         delegate().onReady();

@@ -32,6 +32,10 @@ import brave.sampler.SamplerFunction;
  * @see RpcRequestMatchers
  * @since 5.8
  */
+
+/**
+ * 具体参数化的采样抽样 -> 具体的参数采样，不会影响全局的采用
+ */
 // Not parameterized for client-server types as the generic complexity isn't worth it and properties
 // specific to client and server side are not used in sampling.
 public final class RpcRuleSampler implements SamplerFunction<RpcRequest> {
@@ -86,7 +90,8 @@ public final class RpcRuleSampler implements SamplerFunction<RpcRequest> {
     this.delegate = delegate;
   }
 
-  @Override public Boolean trySample(RpcRequest request) {
+  @Override
+  public Boolean trySample(RpcRequest request) {
     return delegate.trySample(request);
   }
 }

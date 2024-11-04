@@ -14,7 +14,8 @@ import brave.Span;
  * @since 5.10
  */
 public abstract class RpcClientResponse extends RpcResponse {
-  @Override public final Span.Kind spanKind() {
+  @Override
+  public final Span.Kind spanKind() {
     return Span.Kind.CLIENT;
   }
 

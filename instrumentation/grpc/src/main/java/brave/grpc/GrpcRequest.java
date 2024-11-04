@@ -37,6 +37,10 @@ import io.grpc.MethodDescriptor;
  * @see RpcTracing#serverRequestParser()
  * @since 5.12
  */
+
+/**
+ * grpc 请求的基本信息
+ */
 // NOTE: gRPC is Java 1.7+, so we cannot add methods to this later
 public interface GrpcRequest {
   // method would be a nicer name, but this is used in instanceof with an RpcRequest

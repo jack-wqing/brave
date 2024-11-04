@@ -36,6 +36,10 @@ import io.grpc.Status;
  * @see RpcTracing#serverResponseParser()
  * @since 5.12
  */
+
+/**
+ * 响应的基本信息
+ */
 // NOTE: gRPC is Java 1.7+, so we cannot add methods to this later
 public interface GrpcResponse {
   Metadata headers();

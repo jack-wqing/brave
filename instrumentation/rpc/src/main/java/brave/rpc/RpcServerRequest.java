@@ -21,20 +21,24 @@ import brave.propagation.TraceContext;
  */
 public abstract class RpcServerRequest extends RpcRequest {
   static final RemoteGetter<RpcServerRequest> GETTER = new RemoteGetter<RpcServerRequest>() {
-    @Override public Span.Kind spanKind() {
+    @Override
+    public Span.Kind spanKind() {
       return Span.Kind.SERVER;
     }
 
-    @Override public String get(RpcServerRequest request, String key) {
+    @Override
+    public String get(RpcServerRequest request, String key) {
       return request.propagationField(key);
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
       return "RpcServerRequest::propagationField";
     }
   };
 
-  @Override public final Span.Kind spanKind() {
+  @Override
+  public final Span.Kind spanKind() {
     return Span.Kind.SERVER;
   }
 
@@ -58,7 +62,8 @@ public abstract class RpcServerRequest extends RpcRequest {
    * @see BaggagePropagation#allKeyNames(Propagation)
    * @since 5.12
    */
-  @Nullable protected String propagationField(String keyName) {
+  @Nullable
+  protected String propagationField(String keyName) {
     return null;
   }
 }

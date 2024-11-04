@@ -46,6 +46,10 @@ import brave.sampler.SamplerFunction;
  *
  * @since 5.12
  */
+
+/**
+ * 内部请求一层封装设置
+ */
 public final class RpcClientHandler extends RpcHandler<RpcClientRequest, RpcClientResponse> {
   /** @since 5.12 */
   public static RpcClientHandler create(RpcTracing rpcTracing) {

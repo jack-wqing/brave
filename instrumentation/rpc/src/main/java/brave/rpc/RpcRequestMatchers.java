@@ -34,22 +34,26 @@ public final class RpcRequestMatchers {
       this.method = method;
     }
 
-    @Override public boolean matches(Req request) {
+    @Override
+    public boolean matches(Req request) {
       return method.equals(request.method());
     }
 
-    @Override public boolean equals(Object o) {
+    @Override
+    public boolean equals(Object o) {
       if (o == this) return true;
       if (!(o instanceof RpcMethodEquals)) return false;
       RpcMethodEquals that = (RpcMethodEquals) o;
       return method.equals(that.method);
     }
 
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
       return method.hashCode();
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
       return "RpcMethodEquals(" + method + ")";
     }
   }
@@ -73,22 +77,26 @@ public final class RpcRequestMatchers {
       this.service = service;
     }
 
-    @Override public boolean matches(Req request) {
+    @Override
+    public boolean matches(Req request) {
       return service.equals(request.service());
     }
 
-    @Override public boolean equals(Object o) {
+    @Override
+    public boolean equals(Object o) {
       if (o == this) return true;
       if (!(o instanceof RpcServiceEquals)) return false;
       RpcServiceEquals that = (RpcServiceEquals) o;
       return service.equals(that.service);
     }
 
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
       return service.hashCode();
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
       return "RpcServiceEquals(" + service + ")";
     }
   }

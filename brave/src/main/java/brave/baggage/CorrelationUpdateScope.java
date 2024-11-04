@@ -27,7 +27,8 @@ abstract class CorrelationUpdateScope extends AtomicBoolean implements Scope {
    *
    * @return the name used for this field, or null if not configured.
    */
-  @Nullable abstract String name(BaggageField field);
+  @Nullable
+  abstract String name(BaggageField field);
 
   /**
    * Called after a field value is flushed to the underlying context. Only take action if the input

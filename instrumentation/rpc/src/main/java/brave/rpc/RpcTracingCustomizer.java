@@ -42,10 +42,12 @@ import brave.sampler.SamplerFunction;
 public interface RpcTracingCustomizer {
   /** Use to avoid comparing against null references */
   RpcTracingCustomizer NOOP = new RpcTracingCustomizer() {
-    @Override public void customize(RpcTracing.Builder builder) {
+    @Override
+    public void customize(RpcTracing.Builder builder) {
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
       return "NoopRpcTracingCustomizer{}";
     }
   };

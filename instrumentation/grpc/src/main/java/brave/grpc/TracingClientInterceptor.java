@@ -59,7 +59,8 @@ final class TracingClientInterceptor implements ClientInterceptor {
       this.invocationContext = invocationContext;
     }
 
-    @Override public void start(Listener<RespT> responseListener, Metadata headers) {
+    @Override
+    public void start(Listener<RespT> responseListener, Metadata headers) {
       GrpcClientRequest request =
         new GrpcClientRequest(nameToKey, method, callOptions, delegate(), headers);
 
@@ -97,7 +98,8 @@ final class TracingClientInterceptor implements ClientInterceptor {
       }
     }
 
-    @Override public void cancel(@Nullable String message, @Nullable Throwable cause) {
+    @Override
+    public void cancel(@Nullable String message, @Nullable Throwable cause) {
       Scope scope = maybeScopeClientOrInvocationContext(spanRef, invocationContext);
       try {
         delegate().cancel(message, cause);
@@ -106,7 +108,8 @@ final class TracingClientInterceptor implements ClientInterceptor {
       }
     }
 
-    @Override public void halfClose() {
+    @Override
+    public void halfClose() {
       Scope scope = maybeScopeClientOrInvocationContext(spanRef, invocationContext);
       Throwable error = null;
       try {
@@ -131,7 +134,8 @@ final class TracingClientInterceptor implements ClientInterceptor {
       }
     }
 
-    @Override public void request(int numMessages) {
+    @Override
+    public void request(int numMessages) {
       Scope scope = maybeScopeClientOrInvocationContext(spanRef, invocationContext);
       try {
         delegate().request(numMessages);
@@ -140,7 +144,8 @@ final class TracingClientInterceptor implements ClientInterceptor {
       }
     }
 
-    @Override public void sendMessage(ReqT message) {
+    @Override
+    public void sendMessage(ReqT message) {
       Scope scope = maybeScopeClientOrInvocationContext(spanRef, invocationContext);
       try {
         delegate().sendMessage(message);
@@ -151,10 +156,7 @@ final class TracingClientInterceptor implements ClientInterceptor {
   }
 
   /** Scopes the client context or the invocation if the client span finished */
-  Scope maybeScopeClientOrInvocationContext(
-    AtomicReference<Span> spanRef,
-    @Nullable TraceContext invocationContext
-  ) {
+  Scope maybeScopeClientOrInvocationContext(AtomicReference<Span> spanRef, @Nullable TraceContext invocationContext) {
     Span span = spanRef.get();
     TraceContext context = span != null ? span.context() : invocationContext;
     return currentTraceContext.maybeScope(context);
@@ -178,7 +180,8 @@ final class TracingClientInterceptor implements ClientInterceptor {
       this.request = request;
     }
 
-    @Override public void onReady() {
+    @Override
+    public void onReady() {
       Scope scope = maybeScopeClientOrInvocationContext(spanRef, invocationContext);
       try {
         delegate().onReady();
@@ -188,7 +191,8 @@ final class TracingClientInterceptor implements ClientInterceptor {
     }
 
     // See instrumentation/RATIONALE.md for why the below response callbacks are invocation context
-    @Override public void onHeaders(Metadata headers) {
+    @Override
+    public void onHeaders(Metadata headers) {
       // onHeaders() JavaDoc mentions headers are not thread-safe, so we make a safe copy here.
       this.headers.merge(headers);
       Scope scope = currentTraceContext.maybeScope(invocationContext);
@@ -199,7 +203,8 @@ final class TracingClientInterceptor implements ClientInterceptor {
       }
     }
 
-    @Override public void onMessage(RespT message) {
+    @Override
+    public void onMessage(RespT message) {
       Scope scope = currentTraceContext.maybeScope(invocationContext);
       try {
         delegate().onMessage(message);
@@ -208,7 +213,8 @@ final class TracingClientInterceptor implements ClientInterceptor {
       }
     }
 
-    @Override public void onClose(Status status, Metadata trailers) {
+    @Override
+    public void onClose(Status status, Metadata trailers) {
       // See /instrumentation/grpc/RATIONALE.md for why we don't catch exceptions from the delegate
       GrpcClientResponse response = new GrpcClientResponse(request, headers, status, trailers);
       Span span = spanRef.getAndSet(null);

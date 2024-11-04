@@ -6,6 +6,9 @@ package brave.grpc;
 
 import brave.internal.Nullable;
 
+/**
+ * 服务方法名解析
+ */
 final class GrpcParser  {
   @Nullable
   static String method(String fullMethodName) {

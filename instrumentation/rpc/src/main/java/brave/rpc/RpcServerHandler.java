@@ -45,6 +45,10 @@ import brave.sampler.SamplerFunction;
  *
  * @since 5.12
  */
+
+/**
+ * span服务端侧对span定义决定
+ */
 public final class RpcServerHandler extends RpcHandler<RpcServerRequest, RpcServerResponse> {
   /** @since 5.12 */
   public static RpcServerHandler create(RpcTracing rpcTracing) {

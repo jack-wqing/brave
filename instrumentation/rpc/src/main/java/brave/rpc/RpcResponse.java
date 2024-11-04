@@ -24,7 +24,9 @@ public abstract class RpcResponse extends Response {
    *
    * @since 5.12
    */
-  @Override @Nullable public RpcRequest request() {
+  @Override
+  @Nullable
+  public RpcRequest request() {
     return null;
   }
 
@@ -46,7 +48,8 @@ public abstract class RpcResponse extends Response {
    *
    * @since 5.12
    */
-  @Nullable public abstract String errorCode();
+  @Nullable
+  public abstract String errorCode();
 
   /**
    * The timestamp in epoch microseconds of the end of this request or zero to take this implicitly

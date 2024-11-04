@@ -9,6 +9,12 @@ import brave.internal.Platform;
 
 import static brave.internal.Throwables.propagateIfFatal;
 
+/**
+ * 请求的span的start及finish阶段回调
+ * @param <Req>
+ * @param <Resp>
+ */
+
 abstract class RpcHandler<Req extends RpcRequest, Resp extends RpcResponse> {
   final RpcRequestParser requestParser;
   final RpcResponseParser responseParser;

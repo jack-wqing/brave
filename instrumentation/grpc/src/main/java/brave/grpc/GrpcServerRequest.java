@@ -34,15 +34,18 @@ public class GrpcServerRequest extends RpcServerRequest implements GrpcRequest {
   }
 
   /** Returns the {@link #call()} */
-  @Override public Object unwrap() {
+  @Override
+  public Object unwrap() {
     return call;
   }
 
-  @Override public String method() {
+  @Override
+  public String method() {
     return GrpcParser.method(call.getMethodDescriptor().getFullMethodName());
   }
 
-  @Override public String service() {
+  @Override
+  public String service() {
     // MethodDescriptor.getServiceName() is not in our floor version: gRPC 1.2
     return GrpcParser.service(call.getMethodDescriptor().getFullMethodName());
   }
@@ -62,7 +65,8 @@ public class GrpcServerRequest extends RpcServerRequest implements GrpcRequest {
    *
    * @since 5.12
    */
-  @Override public MethodDescriptor<?, ?> methodDescriptor() {
+  @Override
+  public MethodDescriptor<?, ?> methodDescriptor() {
     return call.getMethodDescriptor();
   }
 
@@ -71,11 +75,13 @@ public class GrpcServerRequest extends RpcServerRequest implements GrpcRequest {
    *
    * @since 5.12
    */
-  @Override public Metadata headers() {
+  @Override
+  public Metadata headers() {
     return headers;
   }
 
-  @Override protected String propagationField(String keyName) {
+  @Override
+  protected String propagationField(String keyName) {
     if (keyName == null) throw new NullPointerException("keyName == null");
     Key<String> key = nameToKey.get(keyName);
     if (key == null) {
