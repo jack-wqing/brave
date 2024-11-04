@@ -26,13 +26,13 @@
 
     <dependency>
       <groupId>io.zipkin.reporter2</groupId>
-      <artifactId>zipkin-sender-okhttp3</artifactId>
+      <artifactId>zipkin-reporter-brave</artifactId>
       <version>3.4.2</version>
     </dependency>
 
     <dependency>
       <groupId>io.zipkin.reporter2</groupId>
-      <artifactId>zipkin-reporter-brave</artifactId>
+      <artifactId>zipkin-sender-okhttp3</artifactId>
       <version>3.4.2</version>
     </dependency>
 

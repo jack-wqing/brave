@@ -78,7 +78,8 @@ public abstract class HttpRequest extends Request {
    * @see HttpResponse#route()
    * @see HttpTags#PATH
    */
-  @Nullable public abstract String path();
+  @Nullable
+  public abstract String path();
 
   /**
    * Returns an expression such as "/items/:itemId" representing an application endpoint,
@@ -94,7 +95,8 @@ public abstract class HttpRequest extends Request {
    * @see HttpTags#ROUTE
    * @since 5.10
    */
-  @Nullable public String route() {
+  @Nullable
+  public String route() {
     return null;
   }
 
@@ -108,10 +110,12 @@ public abstract class HttpRequest extends Request {
    * @see HttpResponse#route()
    * @see HttpTags#URL
    */
-  @Nullable public abstract String url();
+  @Nullable
+  public abstract String url();
 
   /** Returns one value corresponding to the specified header, or null. */
-  @Nullable public abstract String header(String name);
+  @Nullable
+  public abstract String header(String name);
 
   HttpRequest() { // sealed type: only client and server
   }
