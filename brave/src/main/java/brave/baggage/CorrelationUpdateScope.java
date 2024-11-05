@@ -56,18 +56,21 @@ abstract class CorrelationUpdateScope extends AtomicBoolean implements Scope {
       this.shouldRevert = shouldRevert;
     }
 
-    @Override public void close() {
+    @Override
+    public void close() {
       // don't duplicate work if called multiple times.
       if (!compareAndSet(false, true)) return;
       delegate.close();
       if (shouldRevert) context.update(field.name, valueToRevert);
     }
 
-    @Override String name(BaggageField field) {
+    @Override
+    String name(BaggageField field) {
       return field.name;
     }
 
-    @Override void handleUpdate(BaggageField field, String value) {
+    @Override
+    void handleUpdate(BaggageField field, String value) {
       if (!this.field.baggageField.equals(field)) return;
       if (!equal(value, valueToRevert)) shouldRevert = true;
     }

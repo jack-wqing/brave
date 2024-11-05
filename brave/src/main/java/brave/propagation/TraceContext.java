@@ -198,7 +198,8 @@ public final class TraceContext extends SamplingFlags {
    * @see #extra()
    * @see Builder#addExtra(Object) for notes on extra values.
    */
-  @Nullable public <T> T findExtra(Class<T> type) {
+  @Nullable
+  public <T> T findExtra(Class<T> type) {
     return findExtra(type, extraList);
   }
 
@@ -221,7 +222,8 @@ public final class TraceContext extends SamplingFlags {
   volatile String parentIdString; // Lazily initialized and cached.
 
   /** Returns the hex representation of the span's parent ID */
-  @Nullable public String parentIdString() {
+  @Nullable
+  public String parentIdString() {
     String r = parentIdString;
     if (r == null && parentId != 0L) {
       r = parentIdString = toLowerHex(parentId);
@@ -232,7 +234,8 @@ public final class TraceContext extends SamplingFlags {
   volatile String localRootIdString; // Lazily initialized and cached.
 
   /** Returns the hex representation of the span's local root ID */
-  @Nullable public String localRootIdString() {
+  @Nullable
+  public String localRootIdString() {
     String r = localRootIdString;
     if (r == null && localRootId != 0L) {
       r = localRootIdString = toLowerHex(localRootId);
@@ -252,7 +255,8 @@ public final class TraceContext extends SamplingFlags {
   }
 
   /** Returns {@code $traceId/$spanId} */
-  @Override public String toString() {
+  @Override
+  public String toString() {
     boolean traceHi = traceIdHigh != 0;
     char[] result = new char[((traceHi ? 3 : 2) * 16) + 1]; // 2 ids and the delimiter
     int pos = 0;
@@ -590,7 +594,8 @@ public final class TraceContext extends SamplingFlags {
    * properly. For example, if a client calls itself, the server-side shouldn't overwrite the client
    * side.
    */
-  @Override public int hashCode() {
+  @Override
+  public int hashCode() {
     int h = hashCode;
     if (h == 0) {
       h = 1000003;

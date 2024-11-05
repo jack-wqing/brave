@@ -280,7 +280,8 @@ public final class B3SingleFormat {
     ));
   }
 
-  @Nullable static SamplingFlags tryParseSamplingFlags(char sampledChar) {
+  @Nullable
+  static SamplingFlags tryParseSamplingFlags(char sampledChar) {
     switch (sampledChar) {
       case '1':
         return SamplingFlags.SAMPLED;

@@ -137,7 +137,8 @@ public final class TraceContextOrSamplingFlags {
   }
 
   /** Returns {@link SamplingFlags#sampled()}, regardless of subtype. */
-  @Nullable public Boolean sampled() {
+  @Nullable
+  public Boolean sampled() {
     return value.sampled();
   }
 
@@ -189,7 +190,8 @@ public final class TraceContextOrSamplingFlags {
    * @see #newBuilder(TraceContext)
    * @since 4.0
    */
-  @Nullable public TraceContext context() {
+  @Nullable
+  public TraceContext context() {
     return type == 1 ? (TraceContext) value : null;
   }
 
@@ -212,7 +214,8 @@ public final class TraceContextOrSamplingFlags {
    * @see #newBuilder(TraceIdContext)
    * @since 4.9
    */
-  @Nullable public TraceIdContext traceIdContext() {
+  @Nullable
+  public TraceIdContext traceIdContext() {
     return type == 2 ? (TraceIdContext) value : null;
   }
 
@@ -228,7 +231,8 @@ public final class TraceContextOrSamplingFlags {
    * @see #newBuilder(SamplingFlags)
    * @since 4.9
    */
-  @Nullable public SamplingFlags samplingFlags() {
+  @Nullable
+  public SamplingFlags samplingFlags() {
     return type == 3 ? value : null;
   }
 
@@ -337,7 +341,8 @@ public final class TraceContextOrSamplingFlags {
     }
   }
 
-  @Override public boolean equals(Object o) {
+  @Override
+  public boolean equals(Object o) {
     if (o == this) return true;
     if (!(o instanceof TraceContextOrSamplingFlags)) return false;
     TraceContextOrSamplingFlags that = (TraceContextOrSamplingFlags) o;
@@ -349,7 +354,8 @@ public final class TraceContextOrSamplingFlags {
     return type == 1 ? ((TraceContext) value).extra() : extraList;
   }
 
-  @Override public int hashCode() {
+  @Override
+  public int hashCode() {
     int h = 1;
     h *= 1000003;
     h ^= type;

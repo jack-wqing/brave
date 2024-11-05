@@ -10,6 +10,10 @@ import brave.propagation.TraceContext;
 import brave.propagation.TraceContextOrSamplingFlags;
 
 /** Internal type that implements context storage for the field. */
+
+/**
+ * Baggage Context统一定义，默认ExtraBaggageContext实现
+ */
 public abstract class BaggageContext {
   @Nullable
   public abstract String getValue(BaggageField field, TraceContextOrSamplingFlags extracted);

@@ -134,6 +134,7 @@ public final class BaggageFields {
   }
 
   static final class Constant extends BaggageContext.ReadOnly {
+
     @Nullable final String value;
 
     Constant(String value) {

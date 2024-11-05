@@ -80,7 +80,8 @@ public class ThreadLocalCurrentTraceContext extends CurrentTraceContext { // not
     revertToNull = new RevertToNullScope(local);
   }
 
-  @Override public TraceContext get() {
+  @Override
+  public TraceContext get() {
     return local.get();
   }
 

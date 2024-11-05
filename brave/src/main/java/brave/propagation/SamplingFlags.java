@@ -105,7 +105,8 @@ public class SamplingFlags {
     return debug(flags);
   }
 
-  @Override public String toString() {
+  @Override
+  public String toString() {
     return toString(flags);
   }
 

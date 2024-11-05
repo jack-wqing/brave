@@ -77,6 +77,10 @@ import java.util.ArrayDeque;
  * }
  * }</pre>
  */
+
+/**
+ * hold 一个线程多个span操作
+ */
 public class ThreadLocalSpan {
   /**
    * This uses the {@link Tracing#currentTracer()}, which means calls to {@link #next()} may return
@@ -90,7 +94,8 @@ public class ThreadLocalSpan {
     return new ThreadLocalSpan(tracer);
   }
 
-  @Nullable final Tracer tracer;
+  @Nullable
+  final Tracer tracer;
 
   ThreadLocalSpan(Tracer tracer) {
     this.tracer = tracer;
@@ -165,8 +170,7 @@ public class ThreadLocalSpan {
    * not possible because there is no api to place an arbitrary span in scope using this api.
    */
   @SuppressWarnings("ThreadLocalUsage") // intentional: to support multiple Tracer instances
-  final ThreadLocal<ArrayDeque<SpanAndScope>> currentSpanInScopeStack =
-    new ThreadLocal<ArrayDeque<SpanAndScope>>();
+  final ThreadLocal<ArrayDeque<SpanAndScope>> currentSpanInScopeStack = new ThreadLocal<ArrayDeque<SpanAndScope>>();
 
   ArrayDeque<SpanAndScope> getCurrentSpanInScopeStack() {
     ArrayDeque<SpanAndScope> stack = currentSpanInScopeStack.get();

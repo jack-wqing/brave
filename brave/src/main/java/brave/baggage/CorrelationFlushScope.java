@@ -22,7 +22,8 @@ final class CorrelationFlushScope extends AtomicBoolean implements Scope {
     pushCurrentUpdateScope(updateScope);
   }
 
-  @Override public void close() {
+  @Override
+  public void close() {
     // don't allow misalignment when close is called multiple times.
     if (!compareAndSet(false, true)) return;
     popCurrentUpdateScope(updateScope);

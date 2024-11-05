@@ -30,8 +30,8 @@ public final class BaggageFields extends MapExtra<BaggageField, String, BaggageF
       return ((BaggageField) input).name();
     }
   };
-  static final UnsafeArrayMap.Builder<String, String> MAP_STRING_STRING_BUILDER =
-      UnsafeArrayMap.<String, String>newBuilder().mapKeys(FIELD_TO_NAME);
+
+  static final UnsafeArrayMap.Builder<String, String> MAP_STRING_STRING_BUILDER = UnsafeArrayMap.<String, String>newBuilder().mapKeys(FIELD_TO_NAME);
 
   public static Factory newFactory(List<BaggageField> fields, int maxDynamicEntries) {
     if (fields == null) throw new NullPointerException("fields == null");

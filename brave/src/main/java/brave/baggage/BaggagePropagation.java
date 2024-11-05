@@ -312,7 +312,8 @@ public final class BaggagePropagation<K> implements Propagation<K> {
       this.setter = setter;
     }
 
-    @Override public void inject(TraceContext context, R request) {
+    @Override
+    public void inject(TraceContext context, R request) {
       delegate.inject(context, request);
       BaggageFields extra = context.findExtra(BaggageFields.class);
       if (extra == null) return;
@@ -345,7 +346,8 @@ public final class BaggagePropagation<K> implements Propagation<K> {
       this.getter = getter;
     }
 
-    @Override public TraceContextOrSamplingFlags extract(R request) {
+    @Override
+    public TraceContextOrSamplingFlags extract(R request) {
       TraceContextOrSamplingFlags.Builder builder = delegate.extract(request).toBuilder();
       BaggageFields extra = factory.baggageFactory.create();
       builder.addExtra(extra);

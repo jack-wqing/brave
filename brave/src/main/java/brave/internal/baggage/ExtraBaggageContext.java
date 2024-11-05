@@ -17,6 +17,9 @@ import java.util.Map;
  *
  * @see BaggageFields
  */
+/**
+ * 通过TraceContext.extra实现存储
+ */
 public final class ExtraBaggageContext extends BaggageContext {
   static final ExtraBaggageContext INSTANCE = new ExtraBaggageContext();
 
